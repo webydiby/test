@@ -7,13 +7,19 @@
   <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+  <header id="header" data-title="가나다라마"></header>
+
+  <!-- home, wish, order, history, account -->
+  
+  <footer id="footer" data-current-page="home"></footer>
+  
   <section>
     <article>
       <div class="component disable">
         <div class="row">
           <p class="name">
             종로1가점
-            <span class="caption">301m</span>
+            <sub>301m</sub>
           </p>
           <button class="like-btn"></button>
         </div>
@@ -24,7 +30,7 @@
           </p>
         </div>
         <div class="row">
-          <div class="logo"></div>
+          <div class="symbol"></div>
           <button class="primary-btn">선택됨</button>
         </div>
       </div>
@@ -32,53 +38,46 @@
         <a href="" class="white semi underline">다른 매장 선택하기</a>
       </div>
     </article>
+
     <article class="dish">
       <div class="menu-bar">
         <p class="title">MENU 선택</p>
         <button class="ham-btn"></button>
         <button class="grid-btn"></button>
       </div>
+
       <ul class="component-group dish-list">
         <li>
-          <img src="img/icon-heart-outline.svg" alt="닭가슴살 & 아보카도 치아바타 샌드 이미지" class="thumb">
-          <div class="row">
-            <p class="name">닭가슴살 & 아보카도 치아바타 샌드</p>
-            <button class="like-btn"></button>
-          </div>
-          <div class="row">
-            <p class="xsmall charcoal">Chicken breast & avocado sand</p>
-          </div>
-          <div class="row">
-            <div class="price">10,000원</div>
-            <button class="primary-btn">선택하기</button>
-          </div>
-        </li>
-        <li>
-          <img src="img/" alt=" 이미지" class="thumb">
-          <div class="row">
-            <p class="name">aaaaa</p>
-            <button class="like-btn"></button>
-          </div>
-          <div class="row">
-            <p class="xsmall charcoal">aaaaa</p>
-          </div>
-          <div class="row">
-            <div class="price">aaaaa</div>
-            <button class="primary-btn">선택하기</button>
+          <img src="img/dish/dish-01.png" alt="닭가슴살 & 아보카도 치아바타 샌드 이미지" class="thumb">
+          <div class="col">
+            <div class="row">
+              <p class="name">닭가슴살 & 아보카도 치아바타 샌드</p>
+              <button class="like-btn"></button>
+            </div>
+            <div class="row">
+              <p class="xsmall charcoal">Chicken breast & avocado sand</p>
+            </div>
+            <div class="row">
+              <p class="price">10,000원</p>
+              <button class="primary-btn">선택하기</button>
+            </div>
           </div>
         </li>
+
         <li>
-          <img src="img/" alt=" 이미지" class="thumb">
-          <div class="row">
-            <p class="name">aaaaa</p>
-            <button class="like-btn"></button>
-          </div>
-          <div class="row">
-            <p class="xsmall charcoal">aaaaa</p>
-          </div>
-          <div class="row">
-            <div class="price">aaaaa</div>
-            <button class="primary-btn">선택하기</button>
+          <img src="img/dish-01.png" alt="닭가슴살 & 아보카도 치아바타 샌드 이미지" class="thumb">
+          <div class="col">
+            <div class="row">
+              <p class="name">닭가슴살 & 아보카도 치아바타 샌드</p>
+              <button class="like-btn"></button>
+            </div>
+            <div class="row">
+              <p class="xsmall charcoal">Chicken breast & avocado sand</p>
+            </div>
+            <div class="row">
+              <p class="price">10,000원</p>
+              <button class="primary-btn">선택하기</button>
+            </div>
           </div>
         </li>
       </ul>
@@ -92,25 +91,23 @@
           <div class="row">
             <p class="name">
               종로1가점
-              <span class="caption">301m</span>
+              <sub>301m</sub>
             </p>
             <button class="like-btn"></button>
           </div>
-          <div class="row">
-            <p class="xsmall charcoal">
-              서울 종로구 MBC로 01 <br>
-              예상 소요시간: 25 ~ 40분
-            </p>
+          <div>
+            <p class="xsmall charcoal">서울 종로구 MBC로 01</p>
+            <p class="xsmall charcoal">예상 소요시간: 25 ~ 40분</p>
           </div>
           <div class="row">
-            <div class="logo"></div>
+            <div class="symbol"></div>
             <button class="primary-btn">주문하기</button>
           </div>
         </li>
       </ul>
       <div class="order component">
         <div class="row">
-          <div class="logo"></div>
+          <div class="symbol"></div>
           <div>
             <p class="xsmall charcoal">5월 28일 (수)</p>
             <p class="name">종로1가점</p>
@@ -119,14 +116,11 @@
           <div class="sub-btn">매장 보기</div>
         </div>
         <div class="small">
-          <p>클래식 햄 치즈 샌드위치 <span>1개</span></p>
-          <p>치킨 시저 샐러드 <span>1개</span></p>
+          <p>클래식 햄 치즈 샌드위치 <b>1개</b></p>
+          <p>치킨 시저 샐러드 <b>1개</b></p>
         </div>
         <div class="horizontal-line"></div>
-        <p class="price">
-          <span>가격</span>
-          10,000 원
-        </p>
+        <p class="price">가격 10,000 원</p>
       </div>
     </article>
   </section>
