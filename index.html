@@ -10,49 +10,50 @@
   <header id="header" data-title="가나다라마"></header>
 
   <!-- home, wish, order, history, account -->
-  
-  <footer id="footer" data-current-page="home"></footer>
+  <!-- /order/store, menu, option, cart -->
+  <footer id="footer" data-current-category="home"></footer>
   
   <section>
     <article>
+      <div class="component menu" data-menu-id="dish-01"></div>
+      <div class="component store" data-store-id="store-01"></div>
       <div class="component disable">
         <div class="row">
           <p class="name">
             종로1가점
             <sub>301m</sub>
           </p>
-          <button class="like-btn"></button>
+          <button class="like-icon"></button>
         </div>
-        <div class="row">
-          <p class="xsmall charcoal">
-            서울 종로구 MBC로 01 <br>
-            예상 소요시간: 25 ~ 40분
-          </p>
+        <div>
+          <p class="xsmall charcoal">서울 종로구 MBC로 01</p>
+          <p class="xsmall charcoal">예상 소요시간: 25 ~ 40분</p>
         </div>
         <div class="row">
           <div class="symbol"></div>
-          <button class="primary-btn">선택됨</button>
+          <button class="primary-btn">주문하기</button>
         </div>
       </div>
-      <div class="menu-bar">
+      <div class="box">
         <a href="" class="white semi underline">다른 매장 선택하기</a>
       </div>
     </article>
-
-    <article class="dish">
-      <div class="menu-bar">
+    
+    <article class="dish white">
+      <div class="box">
         <p class="title">MENU 선택</p>
-        <button class="ham-btn"></button>
-        <button class="grid-btn"></button>
+        <div class="btn-area layout-btns">
+          <button class="list-icon"></button>
+          <button class="grid-icon"></button>
+        </div>
       </div>
-
       <ul class="component-group dish-list">
         <li>
           <img src="img/dish/dish-01.png" alt="닭가슴살 & 아보카도 치아바타 샌드 이미지" class="thumb">
           <div class="col">
             <div class="row">
               <p class="name">닭가슴살 & 아보카도 치아바타 샌드</p>
-              <button class="like-btn"></button>
+              <button class="like-icon"></button>
             </div>
             <div class="row">
               <p class="xsmall charcoal">Chicken breast & avocado sand</p>
@@ -63,13 +64,12 @@
             </div>
           </div>
         </li>
-
         <li>
-          <img src="img/dish-01.png" alt="닭가슴살 & 아보카도 치아바타 샌드 이미지" class="thumb">
+          <img src="img/dish/dish-02.png" alt="닭가슴살 & 아보카도 치아바타 샌드 이미지" class="thumb">
           <div class="col">
             <div class="row">
               <p class="name">닭가슴살 & 아보카도 치아바타 샌드</p>
-              <button class="like-btn"></button>
+              <button class="like-icon"></button>
             </div>
             <div class="row">
               <p class="xsmall charcoal">Chicken breast & avocado sand</p>
@@ -82,9 +82,7 @@
         </li>
       </ul>
     </article>
-  </section>
-
-  <section>
+    
     <article>
       <ul class="component-group store-list">
         <li>
@@ -93,7 +91,7 @@
               종로1가점
               <sub>301m</sub>
             </p>
-            <button class="like-btn"></button>
+            <button class="like-icon"></button>
           </div>
           <div>
             <p class="xsmall charcoal">서울 종로구 MBC로 01</p>
@@ -105,7 +103,10 @@
           </div>
         </li>
       </ul>
-      <div class="order component">
+    </article>
+    <article>
+      
+      <div class="component padding-large">
         <div class="row">
           <div class="symbol"></div>
           <div>
@@ -120,11 +121,13 @@
           <p>치킨 시저 샐러드 <b>1개</b></p>
         </div>
         <div class="horizontal-line"></div>
-        <p class="price">가격 10,000 원</p>
+        <p class="price mla">가격 10,000 원</p>
       </div>
     </article>
   </section>
 
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
   <script src="script/script.js"></script>
 </body>
 </html>

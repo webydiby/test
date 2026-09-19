@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>빙샌드 주문 어플리케이션</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+  <div id="wrap">
+    <header id="header" data-title="주문하기" data-prev-page=""></header>
+
+    <section class="white">
+      <article>
+        <div class="component store disable" data-store-id="store-01"></div>
+        <div class="box">
+          <a href="" class="white semi underline">다른 매장 선택하기</a>
+        </div>
+      </article>
+
+      <article>
+        <div class="box">
+          <p class="title">MENU 선택</p>
+          <div class="btn-area">
+            <button class="list-icon"></button>
+            <button class="grid-icon"></button>
+          </div>
+        </div>
+        <div class="component-group">
+          <div class="component menu" data-menu-id="dish-01"></div>
+          <div class="component menu" data-menu-id="dish-02"></div>
+          <div class="component menu" data-menu-id="dish-03"></div>
+          <div class="component menu" data-menu-id="dish-04"></div>
+          <div class="component menu" data-menu-id="dish-05"></div>
+          <div class="component menu" data-menu-id="dish-06"></div>
+          <div class="component menu" data-menu-id="dish-07"></div>
+          <div class="component menu" data-menu-id="dish-08"></div>
+          <div class="component menu" data-menu-id="dish-09"></div>
+          <div class="component menu" data-menu-id="dish-10"></div>
+        </div>
+      </article>
+      
+      <article>
+        <div class="box">
+          <p class="title">사이드 & 드링크 선택</p>
+        </div>
+        <div class="component menu" data-menu-id="side-01"></div>
+        <div class="component menu" data-menu-id="side-02"></div>
+        <div class="component menu" data-menu-id="side-03"></div>
+      </article>
+    </section>
+    
+    <footer id="footer" data-current-category="order"></footer>
+  </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+</body>
+</html>

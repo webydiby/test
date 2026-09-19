@@ -1,32 +1,35 @@
-const HEADER = document.getElementById('header');
-const FOOTER = document.getElementById('footer');
-const LIKE_BTNS = document.querySelectorAll('.like-btn');
-const MENU_BAR_BTNS = document.querySelectorAll('.menu-bar');
-const MENU_BAR_HAM_BTNS = document.querySelectorAll('.menu-bar ham-btn');
-const MENU_BAR_GRID_BTNS = document.querySelectorAll('.menu-bar grid-btn');
+const $header = document.getElementById('header');
+const $footer = document.getElementById('footer');
+const $likeIcons = document.querySelectorAll('.like-icon');
+const $listIcons = document.querySelectorAll('.list-icon');
+const $gridIcons = document.querySelectorAll('.grid-icon');
 
-const isIndex = window.location.pathname.endsWith('/index.html');
 
 (function loadHeader() {
+  const isIndex = window.location.pathname.endsWith('/index.html');
+
   let signature;
-  let title = HEADER.dataset.title;
-  let prevPage = HEADER.dataset.prevPage;
+  let title = $header.dataset.title;
+  let prevPage = $header.dataset.prevPage;
 
   if (isIndex) signature = `<img src="img/signature.svg" alt="시그니쳐 이미지" id="signature">`;
-  if (prevPage) prevPage = `<a href="${prevPage}" class="prev-btn"></a>`
+  if (prevPage) prevPage = `<a href="${prevPage}" class="prev-icon"></a>`
   if (title) title = `<p class="title">${title}</p>`;
 
-  HEADER.innerHTML = `
+  $header.innerHTML = `
   ${signature ?? ''}
   ${prevPage ?? ''}
   ${title ?? ''}
-  <button class="notice-btn"></button>
-  <button class="cart-btn"></button>
+  <div class ="btn-area">
+    <button class="notice-icon"></button>
+    <button class="cart-icon"></button>
+  </div>
   `;
 })();
 
 (function loadFooter() {
-  FOOTER.innerHTML = `
+  const currentCategory = $footer.dataset.currentCategory;
+  $footer.innerHTML = `
     <div class="footer-btn home">
       <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M19.6095 9.6096L11.8861 1.88617L9.99996 0L0.39036 9.6096C-0.131748 10.1317 -0.131748 10.9737 0.39036 11.4958C0.912467 12.0179 1.75442 12.0179 2.27653 11.4958L3.33486 10.4374V20H16.6698V10.4374L17.7281 11.4958C18.2502 12.0179 19.0921 12.0179 19.6143 11.4958C20.1364 10.9737 20.1364 10.1317 19.6143 9.6096H19.6095ZM11.999 18.6689H8.0009V15.334C8.0009 14.2286 8.89459 13.3349 9.99996 13.3349C11.1053 13.3349 11.999 14.2286 11.999 15.334V18.6689Z" fill="#CCCCCC"/></svg>
       <a href="index.html">홈</a>
@@ -48,21 +51,23 @@ const isIndex = window.location.pathname.endsWith('/index.html');
       <a href="">마이페이지</a>
     </div>
   `;
-  let currentPage = FOOTER.dataset.currentPage;
-  if (currentPage) FOOTER.querySelector(`.${currentPage}`).style.color = 'var(--tomato)';
+  if (currentCategory) $footer.querySelector(`.${currentCategory}`).style.color = 'var(--tomato)';
 })();
 
-LIKE_BTNS.forEach((e) => {
+$likeIcons.forEach((e) => {
   e.addEventListener('click', () => {
     e.classList.toggle('checked');
   });
 });
 
-MENU_BAR_BTNS.forEach((e) => {
-  e.addEventListener('click', (el) => {
-    if (el.target.matches('.ham-btn'))
-      e.classList.remove('grid');
-    if (el.target.matches('.grid-btn'))
-      e.classList.add('grid');
+$listIcons.forEach((e) => {
+  e.addEventListener('click', () => {
+    document.body.classList.remove('show-grid');
+  });
+});
+
+$gridIcons.forEach((e) => {
+  e.addEventListener('click', () => {
+    document.body.classList.add('show-grid');
   });
 });

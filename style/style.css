@@ -1,7 +1,10 @@
 :root {
+  --gutter-small: calc(var(--gutter) * 0.5);
   --gutter: 0.9375em;
-  --gutter-small: calc(var(--gutter) / 2);
-  --gutter-large: calc(var(--gutter) * 2);
+  --gutter-large: calc(var(--gutter) * 1.5);
+
+  --gap: 0.625em;
+  --gap-large: calc(var(--gap) * 4);
 
   --white: hsl(0, 0%, 100%);
   --silver: hsl(0, 0%, 80%);
@@ -22,10 +25,11 @@
   
   --xsmall: 0.75em;
   --small: 0.875em;
+  --regular: 1em;
   --large: 1.25em;
   --xlarge: 1.5em;
-  --xxlarge: 1.75em;
-  --xxxlarge: 2em;
+  /* --xxlarge: 1.75em; */
+  /* --xxxlarge: 2em; */
 
   --header-height: 3.5em;
   --footer-height: 4em;
@@ -34,10 +38,11 @@
 /* 
 todo
 
-씨발 왜 컴포 h가 컨텐츠에 맞게 안따라가냐
-텍스트 행바꿈되면 개씨발임
+고해상도 사진.
 
-img때문
+헤더푸터 그림자, 스크롤 숨기기 액션
+
+url 전부 최상위 경로 (/img...) 변경
 
 
 
@@ -57,31 +62,8 @@ img때문
   list-style: none;
 }
 
-body {
-  background: var(--orange);
-  color: var(--black);
-  font-size: 16px;
-}
-
-p, span, a, button {
-  font-size: 1em;
-  line-height: 1.25;
-}
-
-section {
-  --gap: 3.750em;
-  display: flex;
-  flex-direction: column;
-  padding: calc(var(--gutter) * 2) var(--gutter);
-  margin-top: var(--header-height);
-  margin-bottom: var(--footer-height);
-  gap: var(--gap);
-}
-
-article {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--gap) / 6);
+.mla {
+  margin-left: auto!important;
 }
 
 .xsmall {
@@ -90,6 +72,29 @@ article {
 
 .small {
   font-size: var(--small)!important;
+}
+
+p, span, a, button {
+  font-size: var(--regular);
+  line-height: 1.25;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+.title {
+  font-weight: var(--bold);
+  font-size: var(--large);
+  line-height: 1;
+}
+
+.large {
+  font-size: var(--large)!important;
+}
+
+.xlarge {
+  font-size: var(--xlarge)!important;
 }
 
 .semi {
@@ -136,6 +141,7 @@ article {
   font-weight: var(--xbold);
   line-height: 1;
   text-align: center;
+  word-break: keep-all;
 }
 
 .sub-btn {
@@ -144,67 +150,73 @@ article {
   background: var(--silver);
   color: var(--white);
   font-weight: var(--bold);
-  font-size: 0.9375em;
+  font-size: var(--small);
   line-height: 1;
   text-align: center;
+  word-break: keep-all;
 }
 
-.like-btn {
+[class*='-icon'] {
+  aspect-ratio: var(--ratio, 1 / 1);
+  background: var(--img) no-repeat center / contain;
+
+  &.like-icon {
+    --img: url(../img/icon/icon-heart-outline.svg);
+  }
+
+  &.list-icon {
+    --img: url(../img/icon/icon-list.svg);
+  }
+
+  &.grid-icon {
+    --img: url(../img/icon/icon-grid.svg);
+  }
+
+  &.notice-icon {
+    --ratio: 17 / 20;
+    --img: url(../img/icon/icon-notice.svg);
+  }
+
+  &.cart-icon {
+    --img: url(../img/icon/icon-cart.svg);
+  }
+
+  &.prev-icon {
+    --ratio: 9 / 22;
+    --img: url(../img/icon/icon-prev.svg);
+  }
+}
+
+.symbol {
   aspect-ratio: 1 / 1;
-  background: url(../img/icon/icon-heart-outline.svg) no-repeat center / contain;
-  
-  &.checked {
-    background-image: url(../img/icon/icon-heart.svg);
+  background: url(../img/symbol.svg) no-repeat center / contain;
+}
+
+button.like-icon.checked {
+  --img: url(../img/icon/icon-heart.svg);
+}
+
+.show-grid button.list-icon {
+  opacity: 0.5;
+}
+
+button.grid-icon {
+  opacity: 0.5;
+
+  .show-grid & {
+    opacity: 1;
   }
 }
 
-.menu-bar {
-  display: flex;
-  height: 1.25em;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 0.9375em;
-  padding: 0 var(--gutter-small);
-
-  .title {
-    color: var(--white);
-    font-weight: var(--bold);
-    font-size: var(--large);
-    line-height: 1;
-  }
-
-  .ham-btn {
-    aspect-ratio: 1 / 1;
-    margin-left: auto;
-    background: url(../img/icon/icon-menu.svg) no-repeat center / contain;
-  }
-
-  .grid-btn {
-    aspect-ratio: 1 / 1;
-    background: url(../img/icon/icon-grid.svg) no-repeat center / contain;
-  }
-
-  &.grid .ham-btn,
-  &:not(.grid) .grid-btn {
-    opacity: 0.5;
-  }
-
-  @media (max-width: 500px) {
-    .ham-btn, .grid-btn {
-      display: none;
-    }
-  }
-}
-
-.component,
-.component-group > li {
+/* .component {
+  --gap: 0.625em;
   --plr: 1.25em;
   --ptb: 0.625em;
-  --gap: 0.625em;
   position: relative;
   padding: var(--ptb) var(--plr);
-  border-radius: 1.25em;
+  border-radius: var(--plr);
   background: var(--white);
+  color: var(--black);
   box-shadow: var(--style-shadow);
 
   &, & :is(.row, .col) {
@@ -212,22 +224,34 @@ article {
     flex-direction: column;
     width: 100%;
     flex: 1;
-    row-gap: calc(var(--gap) * var(--row-gap, 1));
-    column-gap: calc(var(--gap) * var(--col-gap, 1));
+    gap: var(--gap);
 
     &.row {
       flex-direction: row;
       align-items: center;
     }
   }
+
+  &.order {
+    --ptb: var(--plr);
+  }
+
+  &.disable {
+    opacity: 0.75;
+    border: 1px solid var(--gray);
+  }
   
   &:has(.thumb) {
-    column-gap: calc(var(--gap) * 1.5);
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     container: has-thumb / inline-size;
+
+    .thumb {
+      flex-basis: var(--thumb-size, 7.5em);
+      border-radius: 0.9375em;
+    }
     
     @container has-thumb (max-width: 20em) {
       
@@ -235,7 +259,7 @@ article {
         --thumb-size: 100%;
       }
 
-      .like-btn {
+      .like-icon {
         position: absolute;
         right: var(--plr);
         top: var(--ptb);
@@ -246,11 +270,6 @@ article {
         margin-top: 0.5em;
       }
     }
-  }
-  
-  &.disable {
-    opacity: 0.75;
-    border: 1px solid var(--gray);
   }
 
   b {
@@ -263,13 +282,7 @@ article {
     line-height: 1;
     vertical-align: baseline;
   }
-
-  .thumb {
-    flex-basis: var(--thumb-size, 7.5em);
-    border-radius: 0.9375em;
-    background: #eee;
-  }
-
+  
   .name {
     font-weight: var(--bold);
   }
@@ -283,37 +296,38 @@ article {
 
   .price {
     word-break: keep-all;
-
   }
 
-  .like-btn {
+  .like-icon {
     width: 0.9375em;
     margin: 0 0 auto auto;
   }
   
   .primary-btn {
     margin: auto 0 0 auto;
-    word-break: keep-all;
-    justify-self: flex-end;
   }
   
   .sub-btn {
     margin: 0 0 auto auto;
-    word-break: keep-all;
   }
-}
+} */
 
-.component-group {
-  --gap: 0.625em;
+/* .component-group {
   display: grid;
   grid-template-columns: repeat(var(--col, 1), 1fr);
-  gap: var(--gap);
+  gap: inherit;
 
   @media (min-width: 501px) {
-    .grid + & {
+    .show-grid & {
       --col: 2;
     }
   }
+} */
+
+body {
+  background: var(--orange);
+  color: var(--black);
+  font-size: 16px;
 }
 
 header {
@@ -323,7 +337,6 @@ header {
   display: flex;
   width: 100%;
   height: var(--header-height);
-  gap: 0.9375em;
   align-items: center;
   justify-content: space-between;
   padding: 1em var(--gutter-large);
@@ -334,51 +347,14 @@ header {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-weight: var(--bold);
-    font-size: 1.25em;
-    line-height: 1;
   }
 
-  #signature {
-    height: 100%;
-  }
-
-  .prev-btn {
+  .prev-icon {
     transform: translateX(-0.75em);
     height: 100%;
-    aspect-ratio: 9 / 22;
     padding: 0.5em 0.75em;
+    background-size: calc(100% - 1.5em) calc(100% - 1em);
     box-sizing: content-box;
-    
-    &::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: url(../img/icon/icon-prev.svg) no-repeat center / contain;
-    }
-  }
-
-  .notice-btn {
-    height: 100%;
-    aspect-ratio: 17 / 20;
-    margin-left: auto;
-    background: url(../img/icon/icon-notice.svg) no-repeat center / contain;
-  }
-
-  .cart-btn {
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    background: url(../img/icon/icon-cart.svg) no-repeat center / contain;
-  }
-}
-
-.order {
-  padding: calc(var(--ptb) * 2) var(--plr);
-  --row-gap: 2;
-
-  .price {
-    margin-left: auto;
   }
 }
 
@@ -421,7 +397,7 @@ footer {
       width: 100%;
       height: 100%;
       padding-top: calc(90% - 1em);
-      font-size: 0.75em;
+      font-size: var(--xsmall);
       line-height: 1;
       text-align: center;
       word-break: keep-all;
@@ -429,7 +405,41 @@ footer {
   }
 }
 
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-large);
+  padding: var(--gap-large) var(--gutter);
+  margin-top: var(--header-height);
+  margin-bottom: var(--footer-height);
+}
 
+article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  
+  .box {
+    display: flex;
+    height: 1.25em;
+    gap: var(--gap);
+    padding: 0 var(--gutter-small);
+  }
+}
+
+.btn-area {
+  display: flex;
+  height: 100%;
+  gap: var(--gutter);
+  margin-left: auto;
+  
+  @media (max-width: 500px) {
+    .list-icon,
+    .grid-icon {
+      display: none;
+    }
+  }
+}
 
 
 
