@@ -59,7 +59,7 @@ function createOrder(element, orderId) {
       <p>치킨 시저 샐러드 <b>1개</b></p>
     </div>
     <div class="horizontal-line"></div>
-    <p class="price mla">총합 ${info.price.toLocaleString()}원</p>
+    <p class="price">총합 ${info.price.toLocaleString()}원</p>
   </div>
   `;
 }
@@ -94,7 +94,6 @@ componentStyle.innerHTML = `
 
     &.row {
       flex-direction: row;
-      align-items: center;
     }
   }
 
@@ -129,7 +128,7 @@ componentStyle.innerHTML = `
         position: absolute;
         right: var(--plr);
         top: var(--ptb);
-        width: 1.125em;
+        width: 1.25em;
       }
 
       .primary-btn {
@@ -157,14 +156,21 @@ componentStyle.innerHTML = `
     height: var(--height, 3.125em);
     margin-top: 0.3125em;
   }
+    
+  &.menu .price {
+    margin: auto 0;
+    word-break: keep-all;
+  }
 
-  .price {
+  &.order .price {
+    margin-left: auto;
     word-break: keep-all;
   }
 
   .like-icon {
-    width: 0.9375em;
-    margin: 0 0 auto auto;
+    width: 1em;
+    margin-left: auto;
+    margin: 0.125em 0.125em auto auto;
   }
   
   .primary-btn {
