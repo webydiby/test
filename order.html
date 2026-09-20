@@ -8,47 +8,26 @@
 </head>
 <body>
   <div id="wrap">
-    <header id="header" data-title="주문하기" data-prev-page=""></header>
+    <header id="header" data-title="주문하기" data-prev-page="index.html"></header>
 
-    <section class="white">
-      <article>
-        <div class="component store disable" data-store-id="store-01"></div>
-        <div class="box">
-          <a href="" class="white semi underline">다른 매장 선택하기</a>
-        </div>
-      </article>
-
-      <article>
-        <div class="box">
-          <p class="title">MENU 선택</p>
-          <div class="btn-area">
-            <button class="list-icon"></button>
-            <button class="grid-icon"></button>
+    <div id="contents">
+      <section class="bg-orange white">
+        <article>
+          <div class="box">
+            <p class="title">찜한 매장</p>
           </div>
-        </div>
-        <div class="component-group">
-          <div class="component menu" data-menu-id="dish-01"></div>
-          <div class="component menu" data-menu-id="dish-02"></div>
-          <div class="component menu" data-menu-id="dish-03"></div>
-          <div class="component menu" data-menu-id="dish-04"></div>
-          <div class="component menu" data-menu-id="dish-05"></div>
-          <div class="component menu" data-menu-id="dish-06"></div>
-          <div class="component menu" data-menu-id="dish-07"></div>
-          <div class="component menu" data-menu-id="dish-08"></div>
-          <div class="component menu" data-menu-id="dish-09"></div>
-          <div class="component menu" data-menu-id="dish-10"></div>
-        </div>
-      </article>
-      
-      <article>
-        <div class="box">
-          <p class="title">사이드 & 드링크 선택</p>
-        </div>
-        <div class="component menu" data-menu-id="side-01"></div>
-        <div class="component menu" data-menu-id="side-02"></div>
-        <div class="component menu" data-menu-id="side-03"></div>
-      </article>
-    </section>
+          <div class="component store" data-store-id="store-01" data-href="order2.html"></div>
+        </article>
+        
+        <article>
+          <div class="box">
+            <p class="title">주변 매장</p>
+          </div>
+          <div class="component store" data-store-id="store-02" data-href="order2.html"></div>
+          <div class="component store" data-store-id="store-03" data-href="order2.html"></div>
+        </article>
+      </section>
+    </div>
     
     <footer id="footer" data-current-category="order"></footer>
   </div>

@@ -95,10 +95,17 @@ const storeInfo = {
     minute: '25'
   },
 
-  'store-02': {
+  'store-03': {
     name: '종로3가점',
     distance: '303m',
     address: '서울 종로구 MBC로 03',
     minute: '25'
+  }
+}
+
+const orderInfo = {
+
+  'order-01': {
+    price: '10000'
   }
 }

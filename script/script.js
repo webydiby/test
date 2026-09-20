@@ -1,12 +1,20 @@
+const $body = document.body;
 const $header = document.getElementById('header');
+const $content = document.getElementById('contents');
 const $footer = document.getElementById('footer');
-const $likeIcons = document.querySelectorAll('.like-icon');
-const $listIcons = document.querySelectorAll('.list-icon');
-const $gridIcons = document.querySelectorAll('.grid-icon');
+const $receipt = document.getElementById('receipt');
+const $listIcons = document.querySelectorAll('button.list-icon');
+const $gridIcons = document.querySelectorAll('button.grid-icon');
+const $likeIcons = document.querySelectorAll('button.like-icon');
+const $selectBtns = document.querySelectorAll('button.select-btn');
+const $addCartBtn = document.querySelector('button.add-cart-btn');
 
 
 (function loadHeader() {
   const isIndex = window.location.pathname.endsWith('/index.html');
+  // const sss = isIndex
+  // ? `<img src="img/signature.svg" alt="시그니쳐 이미지" id="signature">`
+  // : '';
 
   let signature;
   let title = $header.dataset.title;
@@ -40,7 +48,7 @@ const $gridIcons = document.querySelectorAll('.grid-icon');
     </div>
     <div class="footer-btn order">
       <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path d="M26.0186 22.0029C27.1197 22.0029 28.0165 22.8918 28.0166 24V25.9981C28.0165 28.2073 26.223 30 24.0137 30H6.00684C3.7976 29.9999 2.00503 28.2073 2.00488 25.9981V24C2.00495 22.899 2.89394 22.0031 4.00195 22.0029H26.0186Z" fill="white"/><path d="M28.0166 13.9981C29.1197 13.9981 30.0134 14.8921 30.0137 15.9951V18C30.0137 19.1032 29.1198 19.998 28.0166 19.9981H1.99805C0.894777 19.9981 0 19.1033 0 18V15.9951C0.000230221 14.8921 0.894919 13.9981 1.99805 13.9981H28.0166Z" fill="white"/><path d="M22.0098 1.38624e-05C25.3201 0.000227244 28.0097 2.6826 28.0098 6.00001V10.0029C28.0096 11.104 27.1198 12 26.0117 12H4.00195L3.99512 11.9932C2.89401 11.9931 1.99805 11.1033 1.99805 9.99513V5.99318C1.99805 2.68259 4.68724 -0.00704496 8.00488 1.38624e-05H22.0098Z" fill="#CCCCCC"/></svg>
-      <a href="">주문</a>
+      <a href="order.html">주문하기</a>
     </div>
     <div class="footer-btn history">
       <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M16.0019 0H3.99812C1.7921 0 0 1.7921 0 3.99812V20H17.333V4.33208C17.333 4.14864 17.4835 3.99812 17.667 3.99812C17.8504 3.99812 18.0009 4.14864 18.0009 4.33208V7.45061C19.1957 6.75917 20 5.47977 20 3.99812C20 1.78739 18.2079 0 16.0019 0ZM13.9981 17.333H1.99906C1.63217 17.333 1.33114 17.0367 1.33114 16.6651C1.33114 16.2935 1.62747 15.9972 1.99906 15.9972H13.9981C14.365 15.9972 14.666 16.2935 14.666 16.6651C14.666 17.0367 14.3697 17.333 13.9981 17.333ZM13.9981 13.3349H1.99906C1.63217 13.3349 1.33114 13.0386 1.33114 12.667C1.33114 12.2954 1.62747 11.9991 1.99906 11.9991H13.9981C14.365 11.9991 14.666 12.2954 14.666 12.667C14.666 13.0386 14.3697 13.3349 13.9981 13.3349ZM13.9981 9.33208H1.99906C1.63217 9.33208 1.33114 9.03575 1.33114 8.66416C1.33114 8.29257 1.62747 7.99624 1.99906 7.99624H13.9981C14.365 7.99624 14.666 8.29257 14.666 8.66416C14.666 9.03575 14.3697 9.33208 13.9981 9.33208Z" fill="#CCCCCC"/></svg>
@@ -54,20 +62,52 @@ const $gridIcons = document.querySelectorAll('.grid-icon');
   if (currentCategory) $footer.querySelector(`.${currentCategory}`).style.color = 'var(--tomato)';
 })();
 
+$listIcons.forEach((e) => {
+  e.addEventListener('click', () => {
+    $content.classList.remove('show-grid');
+  });
+});
+
+$gridIcons.forEach((e) => {
+  e.addEventListener('click', () => {
+    $content.classList.add('show-grid');
+  });
+});
+
 $likeIcons.forEach((e) => {
   e.addEventListener('click', () => {
     e.classList.toggle('checked');
   });
 });
 
-$listIcons.forEach((e) => {
-  e.addEventListener('click', () => {
-    document.body.classList.remove('show-grid');
-  });
+function disableComponent(element) {
+  const $btn = element.querySelector('.select-btn');
+  const disabled = element.classList.contains('disable');
+  if (!$btn) return;
+  if (!disabled) {
+    element.classList.add('disable');
+    $btn.innerText = '선택됨';
+  } else {
+    element.classList.remove('disable');
+    $btn.innerText = '선택하기';
+  }
+}
+
+$selectBtns.forEach((e) => {
+  const $component = e.closest('.component');
+  e.addEventListener('click', () => disableComponent($component));
 });
 
-$gridIcons.forEach((e) => {
-  e.addEventListener('click', () => {
-    document.body.classList.add('show-grid');
-  });
+$components.forEach((e) => {
+  if (e.classList.contains('disable'))
+    disableComponent(e);
+});
+
+$content.addEventListener('click', (e) => {
+  const cls = $content.classList;
+  const isContained = cls.contains('modal-on');
+  if (!isContained && e.target === $addCartBtn)
+    cls.add('modal-on');
+  if (isContained && !$receipt.contains(e.target))
+    cls.remove('modal-on');
 });

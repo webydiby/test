@@ -3,6 +3,10 @@ const componentStyle = document.createElement('style');
 
 function createMenu(element, menuId) {
   const info = menuInfo[menuId];
+  const href = element.dataset.href;
+  const attr = href ? `href="${href}"` : '';
+  const tag = href ? 'a' : 'button';
+
   element.innerHTML = `
   <img src="img/dish/${menuId}.png" alt="${info.kr} 이미지" class="thumb">
   <div class="col">
@@ -15,7 +19,7 @@ function createMenu(element, menuId) {
     </div>
     <div class="row">
       <p class="price">${parseInt(info.price).toLocaleString()}원</p>
-      <button class="primary-btn">선택하기</button>
+      <${tag} ${attr} class="primary-btn select-btn">선택하기</${tag}>
     </div>
   </div>
   `;
@@ -23,7 +27,10 @@ function createMenu(element, menuId) {
 
 function createStore(element, storeId) {
   const info = storeInfo[storeId];
+  const href = element.dataset.href;
+  const attr = href ? `href="${href}"` : '';
   const minute = parseInt(info.minute);
+
   element.innerHTML = `
   <div class="row">
     <p class="name">
@@ -38,12 +45,14 @@ function createStore(element, storeId) {
   </div>
   <div class="row">
     <div class="symbol"></div>
-    <button class="primary-btn">주문하기</button>
+    <a ${attr} class="primary-btn">주문하기</a>
   </div>
   `;
 }
 
 function createOrder(element, orderId) {
+  const info = orderInfo[orderId];
+
   element.innerHTML = `
   <div class="row">
       <div class="symbol"></div>
@@ -52,14 +61,13 @@ function createOrder(element, orderId) {
         <p class="name">종로1가점</p>
         <p class="xsmall charcoal">서울 종로구 MBC로 01</p>
       </div>
-      <div class="sub-btn">매장 보기</div>
     </div>
     <div class="small">
       <p>클래식 햄 치즈 샌드위치 <b>1개</b></p>
       <p>치킨 시저 샐러드 <b>1개</b></p>
     </div>
     <div class="horizontal-line"></div>
-    <p class="price">총합 ${info.price.toLocaleString()}원</p>
+    <p class="price">총합 ${parseInt(info.price).toLocaleString()}원</p>
   </div>
   `;
 }
@@ -76,14 +84,16 @@ $components.forEach((e) => {
 componentStyle.innerHTML = `
 .component {
   --gap: 0.625em;
-  --plr: 1.25em;
-  --ptb: 0.625em;
+  --padding: 0.625em;
+  --padding-large: 1.25em;
+  --plr: var(--padding-large);
+  --ptb: var(--padding);
   position: relative;
   padding: var(--ptb) var(--plr);
   border-radius: var(--plr);
   background: var(--white);
   color: var(--black);
-  box-shadow: var(--style-shadow);
+  box-shadow: var(--shadow-bottom);
 
   &, & :is(.row, .col) {
     display: flex;
@@ -98,12 +108,11 @@ componentStyle.innerHTML = `
   }
 
   &.order {
-    --ptb: var(--plr);
+    --plr: var(--padding-large);
   }
 
   &.disable {
     opacity: 0.75;
-    border: 1px solid var(--gray);
   }
   
   &:has(.thumb) {
@@ -115,7 +124,7 @@ componentStyle.innerHTML = `
 
     .thumb {
       flex-basis: var(--thumb-size, 7.5em);
-      border-radius: 0.9375em;
+      border-radius: var(--ptb);
     }
     
     @container has-thumb (max-width: 20em) {
@@ -185,6 +194,7 @@ componentStyle.innerHTML = `
 .component-group {
   display: grid;
   grid-template-columns: repeat(var(--col, 1), 1fr);
+  width: 100%;
   gap: inherit;
 
   @media (min-width: 501px) {
