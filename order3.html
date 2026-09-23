@@ -25,7 +25,7 @@
       top: 100%;
       transform: translateY(calc(var(--footer-height) * -1));
       width: 100%;
-      border-radius: calc(var(--radius) * 2) calc(var(--radius) * 2) 0 0;
+      border-radius: var(--radius-2) var(--radius-2) 0 0;
       box-shadow: var(--shadow-top);
       transition: transform var(--duration) ease-in-out, visibility 0s var(--visibility-duration, var(--duration));
       
@@ -36,7 +36,7 @@
 
       .component {
         padding: 0!important;
-        margin-bottom: var(--gap-base)!important;
+        margin-bottom: var(--spacingY-1)!important;
         box-shadow: none!important;
       }
     }

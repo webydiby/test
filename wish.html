@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>빙샌드 주문 어플리케이션</title>
+  <link rel="stylesheet" href="style/style.css">
+  <style>
+    .hidden {
+      visibility: hidden!important;
+      position: absolute!important;
+    }
+
+    nav {
+      width: 100%;
+      height: 4em;
+      background: var(--white);
+      
+      button {
+        float: left;
+        width: 50%;
+        height: 100%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        
+        &.selected {
+          background: var(--orange);
+          color: var(--white);
+        }
+      }
+    }
+
+    :has(#show-store-btn.selected) article:last-of-type,
+    :has(#show-menu-btn.selected) article:first-of-type {
+      visibility: hidden!important;
+      position: absolute!important;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <header id="header" data-title="찜 목록" data-prev-page="index.html"></header>
+
+    <div id="contents" class="bg-orange">
+      <nav>
+        <button id="show-store-btn" class="fw-semi fz-large selected">매장</button>
+        <button id="show-menu-btn" class="fw-semi fz-large">메뉴</button>
+      </nav>
+
+      <section class="c-white">
+        <article>
+          <div class="btn-area paddingX-1">
+            <button class="list-icon"></button>
+            <button class="grid-icon"></button>
+          </div>
+          <div class="component-group">
+            <div class="component" data-store-id="store-01" data-href="order2.html"></div>
+            <div class="component" data-store-id="store-02" data-href="order2.html"></div>
+            <div class="component" data-store-id="store-03" data-href="order2.html"></div>
+          </div>
+        </article>
+
+        <article>
+          <div class="btn-area paddingX-1">
+            <button class="list-icon"></button>
+            <button class="grid-icon"></button>
+          </div>
+          <div class="component-group">
+            <div class="component" data-menu-id="dish-01" data-href="order3.html"></div>
+            <div class="component" data-menu-id="dish-02" data-href="order3.html"></div>
+            <div class="component" data-menu-id="dish-03" data-href="order3.html"></div>
+          </div>
+        </article>
+      </section>
+    </div>
+    
+    <footer id="footer" data-current-category="order"></footer>
+  </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+  <script>
+    const $showStoreBtn = document.getElementById('show-store-btn');
+    const $showMenuBtn = document.getElementById('show-menu-btn');
+
+    function showSelected(element) {
+      const $nowSelected = document.querySelector('.selected');
+      if ($nowSelected)
+        $nowSelected.classList.remove('selected');
+      if (element === $showStoreBtn)
+        $showStoreBtn.classList.add('selected');
+      if (element === $showMenuBtn)
+        $showMenuBtn.classList.add('selected');
+    }
+
+    $showStoreBtn.addEventListener('click', () => showSelected($showStoreBtn));
+    $showMenuBtn.addEventListener('click', () => showSelected($showMenuBtn));
+  </script>
+</body>
+</html>

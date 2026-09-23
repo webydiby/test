@@ -110,7 +110,8 @@ $wrap.addEventListener('click', (e) => {
   const isContained = cls.contains('modal-on');
   if (!isContained && e.target === $openModalBtn)
     cls.add('modal-on');
-  else if (!$modal.contains(e.target)
+  if (!isContained) return;
+  if (!$modal.contains(e.target)
     && e.target !== $openModalBtn
     || e.target === $closeModalBtn)
     cls.remove('modal-on');

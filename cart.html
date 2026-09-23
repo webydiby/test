@@ -13,20 +13,6 @@
     .primary-btn {
       --padding-y: var(--padding-2);
       border-radius: var(--radius);
-      
-      section & {
-        margin: var(--gap-base) 0;
-      }
-    }
-    
-    .flex-row,
-    .flex-col {
-      display: flex;
-      flex-direction: row;
-
-      &.flex-col {
-        flex-direction: column;
-      }
     }
     
     #take-out-btn,
@@ -81,7 +67,7 @@
     .modal {
       
       > :nth-child(2) {
-        margin: var(--gap-base) 0;
+        margin: var(--spacingY-1) 0;
       }
 
       .price {
@@ -90,7 +76,7 @@
     }
     
     footer {
-      padding: var(--gap-base) var(--gutter-large);
+      padding: var(--spacingY-1) var(--spacingX-3);
       align-items: center;
       justify-content: space-between;
     }
@@ -102,17 +88,17 @@
 
     <div id="contents" style="background: hsl(0, 0%, 90%);">
       <section>
-        <article>
+        <article class="gap-2">
           <div class="component" data-order-id="order-01"></div>
           <a href="order2.html" class="primary-btn w-100p add-menu-btn">메뉴를 추가할래요</a>
-          <div class="flex-row w-100p gap-base">
+          <div class="flex-row w-100p gap-1">
             <button id="take-out-btn" class="delivery-method-checked">
-              <p class="fw-bold fz-large">
+              <p class="fw-bold">
                 테이크아웃
               </p>
             </button>
             <button id="delivery-btn">
-              <p class="fw-bold fz-large">
+              <p class="fw-bold">
                 배달 주문
                 <span class="fz-small">+3000원</span>
               </p>
@@ -121,10 +107,10 @@
         </article>
       </section>
 
-      <div class="modal gap-large">
+      <div class="modal gap-2">
         <p class="title">주문이 완료되었어요!</p>
-        <div class="flex-col gap-base w-100p">
-          <div class="flex-row gap-base">
+        <div class="flex-col gap-1 w-100p">
+          <div class="flex-row gap-1">
             <p class="fw-bold">종로1가점 </p>
             <p class="c-grday">5월 28일 (수)</p>
           </div>

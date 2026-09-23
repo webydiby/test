@@ -1,25 +1,15 @@
 :root {
-  --gutter-small: calc(var(--gutter-base) * 0.5);
-  --gutter-base: 0.9375em;
-  --gutter-large: calc(var(--gutter-base) * 1.5);
-
-  /* --spacingX-1: 0;
-  --spacingX-2: 0;
-  --spacingX-3: 0;
-
-  --spacingY-1: 0;
-  --spacingY-2: 0;
-  --spacingY-3: 0;
-
-  --headerHeight; 0;
-  --footerHeight: 0;
+  --spacingX-1: 0.5em;
+  --spacingX-2: 1em;
+  --spacingX-3: 1.5em;
   
-  */
-
-  --gap-base: 0.625em;
-  --gap-large: calc(var(--gap-base) * 4);
+  --spacingY-1: 0.625em;
+  --spacingY-2: 1.25em;
+  --spacingY-3: 1.875em;
+  --spacingY-4: 2.5em;
 
   --radius: 1.25em;
+  --radius-2: 2.5em;
 
   --white: hsl(0, 0%, 100%);
   --silver: hsl(0, 0%, 80%);
@@ -40,8 +30,8 @@
   --regular: 1em;
   --large: 1.25em;
   
-  --shadow-top: 0 -2px 4px hsla(0, 0%, 0%, 10%);
   --shadow-base: 0 0 4px hsla(0, 0%, 0%, 10%);
+  --shadow-top: 0 -2px 4px hsla(0, 0%, 0%, 10%);
   --shadow-bottom: 0 2px 4px hsla(0, 0%, 0%, 10%);
   
   --duration: 150ms;
@@ -83,12 +73,35 @@ small 제거 고민해보기. 미리보기는 변수 주석
   width: 100%!important;
 }
 
-.gap-base {
-  gap: var(--gap-base)!important;
+.flex-row,
+.flex-col {
+  display: flex;
+  flex-direction: row;
+
+  &.flex-col {
+    flex-direction: column;
+  }
 }
 
-.gap-large {
-  gap: var(--large)!important;
+.gap-1 {
+  gap: var(--spacingY-1)!important;
+}
+
+.gap-2 {
+  gap: var(--spacingY-2)!important;
+}
+
+.gap-3 {
+  gap: var(--spacingY-3)!important;
+}
+
+.gap-4 {
+  gap: var(--spacingY-4)!important;
+}
+
+.paddingX-1 {
+  padding-left: var(--spacingX-1)!important;
+  padding-right: var(--spacingX-1)!important;
 }
 
 .bg-orange {
@@ -263,7 +276,7 @@ header {
   height: var(--header-height);
   align-items: center;
   justify-content: space-between;
-  padding: 1em var(--gutter-large);
+  padding: 1em var(--spacingX-3);
   background: var(--white);
   box-shadow: var(--shadow-bottom);
 
@@ -357,8 +370,8 @@ section {
   flex-direction: column;
   width: 100%;
   align-items: center;
-  gap: var(--gap-large);
-  padding: var(--gap-large) var(--gutter-base);
+  gap: var(--spacingY-4);
+  padding: var(--spacingY-4) var(--spacingX-2);
 }
 
 article {
@@ -366,17 +379,13 @@ article {
   flex-direction: column;
   width: 100%;
   align-items: center;
-  gap: var(--gap-base);
+  gap: var(--spacingY-1);
   
   .box {
     display: flex;
     width: 100%;
-    gap: var(--gap-base);
-    padding: 0 var(--gutter-small);
-    
-    .btn-area {
-      height: 1.25em;
-    }
+    gap: var(--spacingY-1);
+    padding: 0 var(--spacingX-1);
   }
 }
 
@@ -389,11 +398,11 @@ article {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  width: calc(100% - (var(--gutter-large) * 2));
-  max-height: calc(100svh - var(--header-height) - var(--footer-height) - (var(--gap-large) * 2));
+  width: calc(100% - (var(--spacingX-3) * 2));
+  max-height: calc(100svh - var(--header-height) - var(--footer-height) - (var(--spacingY-4) * 2));
   align-items: center;
-  gap: var(--gap-base);
-  padding: var(--gap-large) var(--gutter-large);
+  gap: var(--spacingY-1);
+  padding: var(--spacingY-4) var(--spacingX-3);
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: var(--shadow-base);
@@ -406,19 +415,19 @@ article {
 .btn-area {
   display: flex;
   height: 100%;
-  gap: var(--gutter-base);
+  gap: var(--spacingX-2);
   margin-left: auto;
+
+  #contents & {
+    height: 1.25em;
+  }
   
   @media (max-width: 500px) {
-    .list-icon,
-    .grid-icon {
+    &:has(:is(.list-icon, .grid-icon)) {
       display: none;
     }
   }
 }
-
-
-
 
 
 
