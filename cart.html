@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>빙샌드 주문 어플리케이션</title>
+  <link rel="stylesheet" href="style/style.css">
+  <style>
+    :root {
+      --footer-height: 5.25em;
+    }
+    
+    .primary-btn {
+      --padding-y: var(--padding-2);
+      border-radius: var(--radius);
+      
+      section & {
+        margin: var(--gap-base) 0;
+      }
+    }
+    
+    .flex-row,
+    .flex-col {
+      display: flex;
+      flex-direction: row;
+
+      &.flex-col {
+        flex-direction: column;
+      }
+    }
+    
+    #take-out-btn,
+    #delivery-btn {
+      --img: url(img/icon/icon-hamburger.svg);
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      border-radius: var(--radius);
+      background: var(--bg, var(--white));
+      color: var(--black);
+      box-shadow: var(--shadow-bottom);
+      
+      &#delivery-btn {
+        --img: url(img/icon/icon-delivery.svg);
+      }
+
+      &.delivery-method-checked {
+        --bg: var(--orange);
+        --filter: none;
+        color: var(--white);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--img) no-repeat center / auto 80%;
+        opacity: 0.25;
+        filter: var(--filter, brightness(60%));
+      }
+
+      p {
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        position: absolute;
+        left: 1em;
+        top: 1em;
+        width: calc(100% - 2em);
+        gap: 0;
+        align-items: start;
+      }
+    }
+
+    .modal {
+      
+      > :nth-child(2) {
+        margin: var(--gap-base) 0;
+      }
+
+      .price {
+        margin-left: auto;
+      }
+    }
+    
+    footer {
+      padding: var(--gap-base) var(--gutter-large);
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <header id="header" data-title="장바구니" data-prev-page="index.html"></header>
+
+    <div id="contents" style="background: hsl(0, 0%, 90%);">
+      <section>
+        <article>
+          <div class="component" data-order-id="order-01"></div>
+          <a href="order2.html" class="primary-btn w-100p add-menu-btn">메뉴를 추가할래요</a>
+          <div class="flex-row w-100p gap-base">
+            <button id="take-out-btn" class="delivery-method-checked">
+              <p class="fw-bold fz-large">
+                테이크아웃
+              </p>
+            </button>
+            <button id="delivery-btn">
+              <p class="fw-bold fz-large">
+                배달 주문
+                <span class="fz-small">+3000원</span>
+              </p>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <div class="modal gap-large">
+        <p class="title">주문이 완료되었어요!</p>
+        <div class="flex-col gap-base w-100p">
+          <div class="flex-row gap-base">
+            <p class="fw-bold">종로1가점 </p>
+            <p class="c-grday">5월 28일 (수)</p>
+          </div>
+          <div class="horizontal-line"></div>
+          <div>
+            <p>클래식 햄 치즈 샌드위치 1개</p>
+            <p>치킨 시저 샐러드 1개</p>
+          </div>
+          <div class="horizontal-line"></div>
+          <p class="price">총합 10,000원</p>
+        </div>
+        <a href="index.html" class="primary-btn w-100p bg-orange">확인</a>
+      </div>
+    </div>
+    
+    <footer>
+      <div>
+        <p class="fz-large fw-bold">종로1가점</p>
+        <p>
+          <span id="price-invoice">10,000원</span> |
+          <span id="method-invoice">테이크아웃</span>
+        </p>
+      </div>
+      <div class="primary-btn open-modal-btn">주문하기</div>
+    </footer>
+  </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+  <script>
+    const $takeOutBtn = document.getElementById('take-out-btn');
+    const $deliveryBtn = document.getElementById('delivery-btn');
+    const $price = document.querySelector('.price');
+    const totalPrice = parseInt($price.innerText.replace(/\D/g, ''));
+    
+    function updateDeliveryMethod(element) {
+      const $price = document.getElementById('price-invoice');
+      const $method = document.getElementById('method-invoice');
+      const $nowMethod = document.querySelector('.delivery-method-checked');
+      let data;
+      if (element === $takeOutBtn)
+        data = [totalPrice, '테이크아웃'];
+      if (element === $deliveryBtn)
+        data = [totalPrice + 3000, '배달 주문'];
+      if ($nowMethod)
+        $nowMethod.classList.remove('delivery-method-checked');
+      element.classList.add('delivery-method-checked');
+      $price.innerText = `${data[0].toLocaleString()}원`;
+      $method.innerText = data[1];
+    }
+
+    $takeOutBtn.addEventListener('click', () => updateDeliveryMethod($takeOutBtn));
+    $deliveryBtn.addEventListener('click', () => updateDeliveryMethod($deliveryBtn));
+  </script>
+</body>
+</html>

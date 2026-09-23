@@ -107,5 +107,13 @@ const orderInfo = {
 
   'order-01': {
     price: '10000'
-  }
+  },
+
+  'order-02': {
+    price: '10000'
+  },
+
+  'order-03': {
+    price: '10000'
+  },
 }

@@ -15,7 +15,7 @@ function createMenu(element, menuId) {
       <button class="like-icon"></button>
     </div>
     <div class="row">
-      <p class="xsmall charcoal">${info.en}</p>
+      <p class="en-name c-charcoal fz-small">${info.en}</p>
     </div>
     <div class="row">
       <p class="price">${parseInt(info.price).toLocaleString()}원</p>
@@ -40,8 +40,8 @@ function createStore(element, storeId) {
     <button class="like-icon"></button>
   </div>
   <div>
-    <p class="xsmall charcoal">${info.address}</p>
-    <p class="xsmall charcoal">예상 소요시간: ${minute} ~ ${minute + 15}분</p>
+    <p class="c-charcoal fz-small">${info.address}</p>
+    <p class="c-charcoal fz-small">예상 소요시간: ${minute} ~ ${minute + 15}분</p>
   </div>
   <div class="row">
     <div class="symbol"></div>
@@ -57,12 +57,12 @@ function createOrder(element, orderId) {
   <div class="row">
       <div class="symbol"></div>
       <div>
-        <p class="xsmall charcoal">5월 28일 (수)</p>
+        <p class="date c-charcoal fz-small">5월 28일 (수)</p>
         <p class="name">종로1가점</p>
-        <p class="xsmall charcoal">서울 종로구 MBC로 01</p>
+        <p class="address c-charcoal fz-small">서울 종로구 MBC로 01</p>
       </div>
     </div>
-    <div class="small">
+    <div class="details">
       <p>클래식 햄 치즈 샌드위치 <b>1개</b></p>
       <p>치킨 시저 샐러드 <b>1개</b></p>
     </div>
@@ -73,24 +73,24 @@ function createOrder(element, orderId) {
 }
 
 $components.forEach((e) => {
-  if (e.classList.contains('menu'))
+  if (e.hasAttribute('data-menu-id'))
     createMenu(e, e.dataset.menuId);
-  if (e.classList.contains('store'))
+  if (e.hasAttribute('data-store-id'))
     createStore(e, e.dataset.storeId);
-  if (e.classList.contains('order'))
+  if (e.hasAttribute('data-order-id'))
     createOrder(e, e.dataset.orderId);
 });
 
 componentStyle.innerHTML = `
 .component {
-  --gap: 0.625em;
-  --padding: 0.625em;
+  --gap-base: 0.625em;
+  --padding-base: 0.625em;
   --padding-large: 1.25em;
-  --plr: var(--padding-large);
-  --ptb: var(--padding);
+  --paddingX: var(--padding-large);
+  --paddingY: var(--padding-base);
   position: relative;
-  padding: var(--ptb) var(--plr);
-  border-radius: var(--plr);
+  padding: var(--paddingY) var(--paddingX);
+  border-radius: var(--paddingX);
   background: var(--white);
   color: var(--black);
   box-shadow: var(--shadow-bottom);
@@ -100,22 +100,57 @@ componentStyle.innerHTML = `
     flex-direction: column;
     width: 100%;
     flex: 1;
-    gap: var(--gap);
+    gap: var(--gap-base);
 
     &.row {
       flex-direction: row;
     }
   }
-
-  &.order {
-    --plr: var(--padding-large);
-  }
-
+  
   &.disable {
     opacity: 0.75;
   }
   
-  &:has(.thumb) {
+  b {
+    color: var(--orange-red);
+    font-weight: var(--semi);
+  }
+  
+  sub {
+    font-size: var(--small);
+    line-height: 1;
+    vertical-align: baseline;
+  }
+  
+  .name {
+    font-weight: var(--bold);
+  }
+    
+  .price {
+    margin: auto 0;
+    word-break: keep-all;
+  }
+  
+  .primary-btn {
+    margin: auto 0 0 auto;
+  }
+  
+  .sub-btn {
+    margin: 0 0 auto auto;
+  }
+
+  .like-icon {
+    width: 1em;
+    margin-left: auto;
+    margin: 0.125em 0.125em auto auto;
+  }
+
+  .symbol {
+    height: var(--height, 3.125em);
+    margin-top: 0.3125em;
+  }
+
+  &[data-menu-id] {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -124,7 +159,7 @@ componentStyle.innerHTML = `
 
     .thumb {
       flex-basis: var(--thumb-size, 7.5em);
-      border-radius: var(--ptb);
+      border-radius: var(--paddingY);
     }
     
     @container has-thumb (max-width: 20em) {
@@ -135,8 +170,8 @@ componentStyle.innerHTML = `
 
       .like-icon {
         position: absolute;
-        right: var(--plr);
-        top: var(--ptb);
+        right: var(--paddingX);
+        top: var(--paddingY);
         width: 1.25em;
       }
 
@@ -146,48 +181,15 @@ componentStyle.innerHTML = `
     }
   }
 
-  b {
-    color: var(--orange-red);
-    font-weight: var(--semi);
-  }
-  
-  sub {
-    font-size: var(--xsmall);
-    line-height: 1;
-    vertical-align: baseline;
-  }
-  
-  .name {
-    font-weight: var(--bold);
-  }
+  &[data-order-id] {
+    --paddingX: var(--padding-large);
 
-  .symbol {
-    height: var(--height, 3.125em);
-    margin-top: 0.3125em;
-  }
-    
-  &.menu .price {
-    margin: auto 0;
-    word-break: keep-all;
-  }
-
-  &.order .price {
-    margin-left: auto;
-    word-break: keep-all;
-  }
-
-  .like-icon {
-    width: 1em;
-    margin-left: auto;
-    margin: 0.125em 0.125em auto auto;
-  }
-  
-  .primary-btn {
-    margin: auto 0 0 auto;
-  }
-  
-  .sub-btn {
-    margin: 0 0 auto auto;
+    .details {
+      font-size: calc(((var(--regular) + var(--small)) / 2))
+    }
+    .price {
+      margin-left: auto;
+    }
   }
 }
 

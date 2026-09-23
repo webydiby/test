@@ -1,10 +1,23 @@
 :root {
-  --gutter-small: calc(var(--gutter) * 0.5);
-  --gutter: 0.9375em;
-  --gutter-large: calc(var(--gutter) * 1.5);
+  --gutter-small: calc(var(--gutter-base) * 0.5);
+  --gutter-base: 0.9375em;
+  --gutter-large: calc(var(--gutter-base) * 1.5);
 
-  --gap: 0.625em;
-  --gap-large: calc(var(--gap) * 4);
+  /* --spacingX-1: 0;
+  --spacingX-2: 0;
+  --spacingX-3: 0;
+
+  --spacingY-1: 0;
+  --spacingY-2: 0;
+  --spacingY-3: 0;
+
+  --headerHeight; 0;
+  --footerHeight: 0;
+  
+  */
+
+  --gap-base: 0.625em;
+  --gap-large: calc(var(--gap-base) * 4);
 
   --radius: 1.25em;
 
@@ -18,23 +31,23 @@
   --orange: #ffaf1f;
   --green: #78c143;
   
-  --shadow-top: 0 -2px 4px hsla(0, 0%, 0%, 10%);
-  --shadow-bottom: 0 2px 4px hsla(0, 0%, 0%, 10%);
-  
+  --normal: normal;
   --semi: 600;
   --bold: bold;
-  --xbold: 800;
+  --xBold: 800;
   
-  --xsmall: 0.75em;
-  --small: 0.875em;
+  --small: 0.75em;
   --regular: 1em;
   --large: 1.25em;
-  --xlarge: 1.5em;
+  
+  --shadow-top: 0 -2px 4px hsla(0, 0%, 0%, 10%);
+  --shadow-base: 0 0 4px hsla(0, 0%, 0%, 10%);
+  --shadow-bottom: 0 2px 4px hsla(0, 0%, 0%, 10%);
+  
+  --duration: 150ms;
 
   --header-height: 3.5em;
   --footer-height: 4em;
-
-  --duration: 150ms;
 }
 
 /* 
@@ -70,11 +83,55 @@ small 제거 고민해보기. 미리보기는 변수 주석
   width: 100%!important;
 }
 
-.xsmall {
-  font-size: var(--xsmall)!important;
+.gap-base {
+  gap: var(--gap-base)!important;
 }
 
-.small {
+.gap-large {
+  gap: var(--large)!important;
+}
+
+.bg-orange {
+  background-color: var(--orange)!important;
+}
+
+.bg-white {
+  background-color: var(--white)!important;
+}
+
+.bg-silver {
+  background-color: var(--silver)!important;
+}
+
+.c-orange-red {
+  color: var(--orange-red)!important;
+}
+
+.c-white {
+  color: var(--white)!important;
+}
+
+.c-gray {
+  color: var(--gray)!important;
+}
+
+.c-charcoal {
+  color: var(--charcoal)!important;
+}
+
+.fw-semi {
+  font-weight: var(--semi)!important;
+}
+
+.fw-bold {
+  font-weight: var(--bold)!important;
+}
+
+.fw-xbold {
+  font-weight: var(--xBold)!important;
+}
+
+.fz-small {
   font-size: var(--small)!important;
 }
 
@@ -83,8 +140,8 @@ p, span, a, button {
   line-height: 1.25;
 }
 
-a, button {
-  cursor: pointer;
+.fz-large {
+  font-size: var(--large)!important;
 }
 
 .title {
@@ -93,45 +150,13 @@ a, button {
   line-height: 1;
 }
 
-.large {
-  font-size: var(--large)!important;
-}
-
-.xlarge {
-  font-size: var(--xlarge)!important;
-}
-
-.semi {
-  font-weight: var(--semi)!important;
-}
-
-.bold {
-  font-weight: var(--bold)!important;
-}
-
-.xbold {
-  font-weight: var(--xbold)!important;
-}
-
-.bg-orange {
-  background-color: var(--orange)!important;
-}
-
-.white {
-  color: var(--white)!important;
-}
-
-.gray {
-  color: var(--gray)!important;
-}
-
-.charcoal {
-  color: var(--charcoal)!important;
-}
-
-.underline {
+.td-underline {
   text-decoration: underline;
   text-underline-offset: 0.25em;
+}
+
+a, button {
+  cursor: pointer;
 }
 
 .horizontal-line {
@@ -142,17 +167,20 @@ a, button {
 }
 
 .primary-btn {
-  padding: 1.0625em 1.25em;
-  border-radius: 3.125em;
+  --padding-1: 1.125em;
+  --padding-2: 1.5em;
+  --padding-y: var(--padding-1);
+  padding: var(--padding-y) 1.25em;
+  border-radius: calc(var(--padding-y) * 2 + 1em);
   background: var(--orange-red);
   color: var(--white);
-  font-weight: var(--xbold);
+  font-weight: var(--xBold);
   line-height: 1;
   text-align: center;
   word-break: keep-all;
 }
 
-.sub-btn {
+/* .sub-btn {
   padding: 0.5em 0.75em;
   border-radius: 2em;
   background: var(--silver);
@@ -162,7 +190,7 @@ a, button {
   line-height: 1;
   text-align: center;
   word-break: keep-all;
-}
+} */
 
 [class*='-icon'] {
   aspect-ratio: var(--ratio, 1 / 1);
@@ -216,7 +244,6 @@ button.grid-icon {
   }
 }
 
-
 body {
   color: var(--black);
   font-size: 16px;
@@ -225,7 +252,6 @@ body {
 #wrap {
   width: 100%;
   height: 100svh;
-  /* overflow-y: scroll; */
 }
 
 header {
@@ -297,7 +323,7 @@ footer {
       width: 100%;
       height: 100%;
       padding-top: calc(90% - 1em);
-      font-size: var(--xsmall);
+      font-size: var(--small);
       line-height: 1;
       text-align: center;
       word-break: keep-all;
@@ -308,10 +334,12 @@ footer {
 #contents {
   position: relative;
   width: 100%;
+  min-height: 100%;
   padding-top: var(--header-height);
   padding-bottom: var(--footer-height);
 
-  &.modal-on::after {
+  .modal-on &::after {
+    z-index: 1;
     content: '';
     position: absolute;
     left: 0;
@@ -330,7 +358,7 @@ section {
   width: 100%;
   align-items: center;
   gap: var(--gap-large);
-  padding: var(--gap-large) var(--gutter);
+  padding: var(--gap-large) var(--gutter-base);
 }
 
 article {
@@ -338,21 +366,47 @@ article {
   flex-direction: column;
   width: 100%;
   align-items: center;
-  gap: var(--gap);
+  gap: var(--gap-base);
   
   .box {
     display: flex;
     width: 100%;
-    height: 1.25em;
-    gap: var(--gap);
+    gap: var(--gap-base);
     padding: 0 var(--gutter-small);
+    
+    .btn-area {
+      height: 1.25em;
+    }
+  }
+}
+
+.modal {
+  visibility: hidden;
+  z-index: 2;
+  position: fixed;
+  left: 50%;
+  top: calc(var(--header-height) + (100svh - var(--header-height) - var(--footer-height)) / 2);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - (var(--gutter-large) * 2));
+  max-height: calc(100svh - var(--header-height) - var(--footer-height) - (var(--gap-large) * 2));
+  align-items: center;
+  gap: var(--gap-base);
+  padding: var(--gap-large) var(--gutter-large);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-base);
+
+  .modal-on & {
+    visibility: visible;
   }
 }
 
 .btn-area {
   display: flex;
   height: 100%;
-  gap: var(--gutter);
+  gap: var(--gutter-base);
   margin-left: auto;
   
   @media (max-width: 500px) {

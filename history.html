@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>빙샌드 주문 어플리케이션</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+  <div id="wrap">
+    <header id="header" data-title="주문 내역" data-prev-page="index.html"></header>
+
+    <div id="contents" style="background: hsl(0, 0%, 90%);">
+      <section>
+        <article>
+          <div class="component" data-order-id="order-01"></div>
+          <div class="component" data-order-id="order-02"></div>
+          <div class="component" data-order-id="order-03"></div>
+        </article>
+      </section>
+    </div>
+    
+    <footer id="footer" data-current-category="history"></footer>
+  </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+</body>
+</html>
