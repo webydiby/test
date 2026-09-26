@@ -267,7 +267,7 @@ button.grid-icon {
 
 body {
   color: var(--black);
-  font-size: clamp(14px, 0.694vw + 10.667px, 16px);
+  font-size: clamp(14px, calc(0.446vw + 12.572px), 16px);
   
   @media (min-width: 1025px) {
     background: var(--black);
