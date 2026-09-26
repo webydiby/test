@@ -2,20 +2,79 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>빙샌드 주문 어플리케이션</title>
   <link rel="stylesheet" href="style/style.css">
+  <style>
+    #splash {
+      --dur-1: 150ms;
+      --dly-1: 1200ms;
+      --dur-2: 150ms;
+      --dly-2: calc(150ms + 1200ms + 300ms);
+      --dur-3: 300ms;
+      --dly-3: calc(150ms + 1200ms + 300ms + 150ms + 1500ms);
+      z-index: 100;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: var(--orange);
+      animation: scene-3 var(--dur-3) ease-out var(--dly-3) forwards;
+
+      .txt-box {
+        position: absolute;
+        left: calc((100% - 45%) / 2);
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 45%;
+        height: 20%;
+        background: red;
+        overflow: hidden;
+        animation: scene-1 var(--dur-1) ease-out var(--dly-1) forwards;
+      }
+   
+      .logo {
+        visibility: hidden;
+        position: absolute;
+        left: 60%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 62.5%;
+        aspect-ratio: 5 / 2;
+        opacity: 0;
+        background: white;
+        animation: scene-2 var(--dur-2) ease-out var(--dly-2) forwards;
+      }
+    }
+    
+    
+    @keyframes scene-1 {
+      to {
+        width: 0;
+      }
+    }
+    
+    @keyframes scene-2 {
+      to {
+        visibility: visible;
+        left: 50%;
+        opacity: 1;
+      }
+    }
+    
+    @keyframes scene-3 {
+      to {
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+    </style>
 </head>
 <body>
-  <div id="wrap">
-    <header id="header"></header>
-
-    <div id="contents"></div>
-    
-    <footer id="footer" data-current-category="home"></footer>
+  <div id="splash" class="scene-3">
+    <div class="txt-box scene-1">
+      <p>혹은이미지</p>
+    </div>
+    <div class="logo scene-2"></div>
   </div>
-  <script src="script/data.js"></script>
-  <script src="script/component.js"></script>
-  <script src="script/script.js"></script>
 </body>
 </html>

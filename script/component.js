@@ -199,7 +199,7 @@ componentStyle.innerHTML = `
   width: 100%;
   gap: inherit;
 
-  @media (min-width: 501px) {
+  @container screen (min-width: 500px) {
     .show-grid & {
       --col: 2;
     }

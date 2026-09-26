@@ -3,6 +3,7 @@ const $header = document.getElementById('header');
 const $content = document.getElementById('contents');
 const $footer = document.getElementById('footer');
 const $modal = document.querySelector('.modal');
+const $modalContent = document.querySelector('.modal-contents');
 const $openModalBtn = document.querySelector('.open-modal-btn');
 const $closeModalBtn = document.querySelector('.close-modal-btn');
 const $listIcons = document.querySelectorAll('button.list-icon');
@@ -12,8 +13,8 @@ const $selectBtns = document.querySelectorAll('button.select-btn');
 
 (function loadHeader() {
   if (!$header) return;
-  const isIndex = window.location.pathname.endsWith('/index.html');
-  // const sss = isIndex
+  const isHome = window.location.pathname.endsWith('/home.html');
+  // const sss = isHome
   // ? `<img src="img/signature.svg" alt="시그니쳐 이미지" id="signature">`
   // : '';
 
@@ -21,7 +22,7 @@ const $selectBtns = document.querySelectorAll('button.select-btn');
   let title = $header.dataset.title;
   let prevPage = $header.dataset.prevPage;
 
-  if (isIndex) signature = `<img src="img/signature.svg" alt="시그니쳐 이미지" id="signature">`;
+  if (isHome) signature = `<img src="img/signature.svg" alt="시그니쳐 이미지" id="signature">`;
   if (prevPage) prevPage = `<a href="${prevPage}" class="prev-icon"></a>`
   if (title) title = `<p class="title">${title}</p>`;
 
@@ -42,7 +43,7 @@ const $selectBtns = document.querySelectorAll('button.select-btn');
   $footer.innerHTML = `
     <div class="footer-btn home">
       <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M19.6095 9.6096L11.8861 1.88617L9.99996 0L0.39036 9.6096C-0.131748 10.1317 -0.131748 10.9737 0.39036 11.4958C0.912467 12.0179 1.75442 12.0179 2.27653 11.4958L3.33486 10.4374V20H16.6698V10.4374L17.7281 11.4958C18.2502 12.0179 19.0921 12.0179 19.6143 11.4958C20.1364 10.9737 20.1364 10.1317 19.6143 9.6096H19.6095ZM11.999 18.6689H8.0009V15.334C8.0009 14.2286 8.89459 13.3349 9.99996 13.3349C11.1053 13.3349 11.999 14.2286 11.999 15.334V18.6689Z" fill="#CCCCCC"/></svg>
-      <a href="index.html">홈</a>
+      <a href="home.html">홈</a>
     </div>
     <div class="footer-btn wish">
       <svg viewBox="0 0 11 10" xmlns="http://www.w3.org/2000/svg"><path d="M5.822 0.770975L5.35588 1.23709L4.88977 0.770975C3.85928 -0.256992 2.18884 -0.256992 1.15835 0.770975C-0.386117 2.31293 -0.386117 4.8123 1.15835 6.35677L4.42366 9.61451C4.93764 10.1285 5.77412 10.1285 6.28811 9.61451L9.55341 6.35677C11.0979 4.81482 11.0979 2.31544 9.55341 0.770975C8.52293 -0.256992 6.85248 -0.256992 5.822 0.770975Z" fill="#CCCCCC"/></svg>
@@ -111,7 +112,7 @@ $wrap.addEventListener('click', (e) => {
   if (!isContained && e.target === $openModalBtn)
     cls.add('modal-on');
   if (!isContained) return;
-  if (!$modal.contains(e.target)
+  if (!$modalContent.contains(e.target)
     && e.target !== $openModalBtn
     || e.target === $closeModalBtn)
     cls.remove('modal-on');

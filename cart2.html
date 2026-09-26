@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>빙샌드 주문 어플리케이션</title>
   <link rel="stylesheet" href="style/style.css">
   <style>
@@ -65,13 +65,16 @@
     }
 
     .modal {
-      
-      > :nth-child(2) {
-        margin: var(--spacingY-1) 0;
-      }
 
-      .price {
-        margin-left: auto;
+      .modal-contents {
+
+        > :nth-child(2) {
+          margin: var(--spacingY-1) 0;
+        }
+  
+        .price {
+          margin-left: auto;
+        }
       }
     }
     
@@ -84,58 +87,62 @@
 </head>
 <body>
   <div id="wrap">
-    <header id="header" data-title="장바구니" data-prev-page="order3.html"></header>
+    <div id="screen">
+      <header id="header" data-title="장바구니" data-prev-page="order3.html"></header>
+  
+      <div id="contents" style="background: hsl(0, 0%, 90%);">
+        <section>
+          <article class="gap-2">
+            <div class="component" data-order-id="order-01"></div>
+            <a href="order2.html" class="primary-btn w-100p add-menu-btn">메뉴를 추가할래요</a>
+            <div class="flex-row w-100p gap-1">
+              <button id="take-out-btn" class="delivery-method-checked">
+                <p class="fw-bold">
+                  테이크아웃
+                </p>
+              </button>
+              <button id="delivery-btn">
+                <p class="fw-bold">
+                  배달 주문
+                  <span class="fz-small">+3000원</span>
+                </p>
+              </button>
+            </div>
+          </article>
+        </section>
+      </div>
 
-    <div id="contents" style="background: hsl(0, 0%, 90%);">
-      <section>
-        <article class="gap-2">
-          <div class="component" data-order-id="order-01"></div>
-          <a href="order2.html" class="primary-btn w-100p add-menu-btn">메뉴를 추가할래요</a>
-          <div class="flex-row w-100p gap-1">
-            <button id="take-out-btn" class="delivery-method-checked">
-              <p class="fw-bold">
-                테이크아웃
-              </p>
-            </button>
-            <button id="delivery-btn">
-              <p class="fw-bold">
-                배달 주문
-                <span class="fz-small">+3000원</span>
-              </p>
-            </button>
+      <div class="modal">
+        <div class="modal-contents gap-2">
+          <p class="title">주문이 완료되었어요!</p>
+          <div class="flex-col gap-1 w-100p">
+            <div class="flex-row gap-1">
+              <p class="fw-bold">종로1가점 </p>
+              <p>5월 28일 (수)</p>
+            </div>
+            <div class="horizontal-line"></div>
+            <div>
+              <p>클래식 햄 치즈 샌드위치 1개</p>
+              <p>치킨 시저 샐러드 1개</p>
+            </div>
+            <div class="horizontal-line"></div>
+            <p class="price">총합 10,000원</p>
           </div>
-        </article>
-      </section>
-
-      <div class="modal gap-2">
-        <p class="title">주문이 완료되었어요!</p>
-        <div class="flex-col gap-1 w-100p">
-          <div class="flex-row gap-1">
-            <p class="fw-bold">종로1가점 </p>
-            <p class="c-grday">5월 28일 (수)</p>
-          </div>
-          <div class="horizontal-line"></div>
-          <div>
-            <p>클래식 햄 치즈 샌드위치 1개</p>
-            <p>치킨 시저 샐러드 1개</p>
-          </div>
-          <div class="horizontal-line"></div>
-          <p class="price">총합 10,000원</p>
+          <a href="home.html" class="primary-btn w-100p bg-orange">확인</a>
         </div>
-        <a href="index.html" class="primary-btn w-100p bg-orange">확인</a>
       </div>
+      
+      <footer>
+        <div>
+          <p class="fz-large fw-bold">종로1가점</p>
+          <p>
+            <span id="price-invoice">10,000원</span> |
+            <span id="method-invoice">테이크아웃</span>
+          </p>
+        </div>
+        <div class="primary-btn open-modal-btn">주문하기</div>
+      </footer>
     </div>
-    
-    <footer>
-      <div>
-        <p class="fz-large fw-bold">종로1가점</p>
-        <p>
-          <span id="price-invoice">10,000원</span> |
-          <span id="method-invoice">테이크아웃</span>
-        </p>
-      </div>
-      <div class="primary-btn open-modal-btn">주문하기</div>
-    </footer>
   </div>
   <script src="script/data.js"></script>
   <script src="script/component.js"></script>
