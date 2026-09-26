@@ -65,15 +65,14 @@
     }
 
     .modal {
+      --transition: opacity;
+      --duration: 75ms;
 
       .modal-contents {
+        opacity: 0;
 
-        > :nth-child(2) {
-          margin: var(--spacingY-1) 0;
-        }
-  
-        .price {
-          margin-left: auto;
+        .modal-on & {
+          opacity: 1;
         }
       }
     }
@@ -113,7 +112,7 @@
       </div>
 
       <div class="modal">
-        <div class="modal-contents gap-2">
+        <div class="modal-contents gap-3">
           <p class="title">주문이 완료되었어요!</p>
           <div class="flex-col gap-1 w-100p">
             <div class="flex-row gap-1">
@@ -126,7 +125,7 @@
               <p>치킨 시저 샐러드 1개</p>
             </div>
             <div class="horizontal-line"></div>
-            <p class="price">총합 10,000원</p>
+            <p class="price" style="margin-left: auto;">총합 10,000원</p>
           </div>
           <a href="home.html" class="primary-btn w-100p bg-orange">확인</a>
         </div>

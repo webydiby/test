@@ -141,7 +141,6 @@ componentStyle.innerHTML = `
 
   .like-icon {
     width: 1em;
-    margin-left: auto;
     margin: 0.125em 0.125em auto auto;
   }
 
@@ -158,14 +157,14 @@ componentStyle.innerHTML = `
     container: has-thumb / inline-size;
 
     .thumb {
-      flex-basis: var(--thumb-size, 7.5em);
+      width: 7.5em;
       border-radius: var(--paddingY);
     }
     
     @container has-thumb (max-width: 20em) {
       
       .thumb {
-        --thumb-size: 100%;
+        width: 100%;
       }
 
       .like-icon {
@@ -199,9 +198,19 @@ componentStyle.innerHTML = `
   width: 100%;
   gap: inherit;
 
-  @container screen (min-width: 500px) {
+  @container screen (min-width: 481px) {
     .show-grid & {
       --col: 2;
+    }
+  }
+}
+
+.btn-area:has(> :is(.list-icon, .grid-icon)) {
+  height: 1.25em;
+
+  @container screen (max-width: 480px) {
+    & {
+      display: none!important;
     }
   }
 }
