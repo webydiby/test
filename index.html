@@ -88,10 +88,14 @@
       </div>
 
       <header id="header"></header>
+
+      <div id="contents">
+        <img src="img/banner.png" alt="배너 이미지" class="banner w-100p">
+      </div>
   
       <div id="contents"></div>
       
-      <footer id="footer" data-current-category="home"></footer>
+      <nav id="bnb" data-current-category="index"></nav>
     </div>
   </div>
   <script src="script/data.js"></script>
@@ -115,13 +119,9 @@
     }
 
     (function splashCheck() {
-      const referrer = document.referrer;
-
-      if (referrer && new URL(referrer).origin === location.origin)
-        $splash.style.display = 'none';
-      else startSplash();
-      // if (sessionStorage.getItem('revisit') === null) startSplash();
-      // else $splash.style.display = 'none';
+      if (sessionStorage.getItem('revisit') === null)
+        startSplash();
+      else $splash.style.display = 'none';
     }());
   </script>
 </body>

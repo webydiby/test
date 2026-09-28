@@ -35,7 +35,7 @@
   --shadow-bottom: 0 2px 4px hsla(0, 0%, 0%, 10%);
 
   --header-height: 3.5em;
-  --footer-height: 4em;
+  --bnb-height: 4em;
 }
 
 /* 
@@ -65,8 +65,9 @@ small 제거 고민해보기. 미리보기는 변수 주석
   border: none;
   text-decoration: none;
   list-style: none;
+  vertical-align: top;
   word-break: keep-all;
-  overflow-wrap: anywhere;
+  /* overflow-wrap: anywhere; */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -301,7 +302,7 @@ body {
     overflow: hidden;
     
     #contents {
-      height: calc(100% - var(--header-height) - var(--footer-height));
+      height: calc(100% - var(--header-height) - var(--bnb-height));
       height: 100%;
       overflow-y: scroll;
   
@@ -310,16 +311,13 @@ body {
       }
     }
 
-    #header,
-    #footer,
-    #splash,
-    .modal {
-      position: absolute;
+    > * {
+      position: absolute!important;
     }
   }
 }
 
-header {
+#header {
   z-index: 99;
   position: fixed;
   top: 0;
@@ -348,20 +346,20 @@ header {
   }
 }
 
-footer {
+#bnb {
   z-index: 99;
   position: fixed;
   bottom: 0;
   display: flex;
   width: 100%;
-  height: var(--footer-height);
+  height: var(--bnb-height);
   padding: 0.5em 0;
   align-items: center;
   justify-content: space-evenly;
   background: #fff;
   box-shadow: var(--shadow-top);
   
-  .footer-btn {
+  .bnb-btn {
     position: relative;
     height: 100%;
     aspect-ratio: 1 / 1;
@@ -400,9 +398,8 @@ footer {
   position: relative;
   width: 100%;
   min-height: 100%;
-  /* min-height: calc(100% - var(--header-height) - var(--footer-height)); */
   padding-top: var(--header-height);
-  padding-bottom: var(--footer-height);
+  padding-bottom: var(--bnb-height);
 }
 
 section {
@@ -438,7 +435,7 @@ article {
   left: 0;
   top: var(--header-height);
   width: 100%;
-  height: calc(100% - var(--header-height) - var(--footer-height));
+  height: calc(100% - var(--header-height) - var(--bnb-height));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -454,7 +451,7 @@ article {
     display: flex;
     flex-direction: column;
     width: calc(100% - (var(--spacingX-3) * 2));
-    max-height: calc(100svh - var(--header-height) - var(--footer-height) - (var(--spacingY-4) * 2));
+    max-height: calc(100svh - var(--header-height) - var(--bnb-height) - (var(--spacingY-4) * 2));
     align-items: center;
     gap: var(--spacingY-1);
     padding: var(--spacingY-4) var(--spacingX-3);

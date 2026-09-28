@@ -12,7 +12,6 @@ function createMenu(element, menuId) {
   <div class="col">
     <div class="row">
       <p class="name">${info.kr}</p>
-      <button class="like-icon"></button>
     </div>
     <div class="row">
       <p class="en-name c-charcoal fz-small">${info.en}</p>
@@ -37,7 +36,6 @@ function createStore(element, storeId) {
       ${info.name}
       <sub>${info.distance}</sub>
     </p>
-    <button class="like-icon"></button>
   </div>
   <div>
     <p class="c-charcoal fz-small">${info.address}</p>
@@ -84,10 +82,8 @@ $components.forEach((e) => {
 componentStyle.innerHTML = `
 .component {
   --gap-base: 0.625em;
-  --padding-base: 0.625em;
-  --padding-large: 1.25em;
-  --paddingX: var(--padding-large);
-  --paddingY: var(--padding-base);
+  --paddingX: 1.25em;
+  --paddingY: 0.625em;
   position: relative;
   padding: var(--paddingY) var(--paddingX);
   border-radius: var(--paddingX);
@@ -100,7 +96,7 @@ componentStyle.innerHTML = `
     flex-direction: column;
     width: 100%;
     flex: 1;
-    gap: var(--gap-base);
+    gap: var(--paddingY);
 
     &.row {
       flex-direction: row;
@@ -109,6 +105,7 @@ componentStyle.innerHTML = `
   
   &.disable {
     opacity: 0.75;
+    pointer-events: none;
   }
   
   b {
@@ -134,15 +131,6 @@ componentStyle.innerHTML = `
   .primary-btn {
     margin: auto 0 0 auto;
   }
-  
-  .sub-btn {
-    margin: 0 0 auto auto;
-  }
-
-  .like-icon {
-    width: 1em;
-    margin: 0.125em 0.125em auto auto;
-  }
 
   .symbol {
     height: var(--height, 3.125em);
@@ -167,13 +155,6 @@ componentStyle.innerHTML = `
         width: 100%;
       }
 
-      .like-icon {
-        position: absolute;
-        right: var(--paddingX);
-        top: var(--paddingY);
-        width: 1.25em;
-      }
-
       .primary-btn {
         margin-top: 0.5em;
       }
@@ -181,7 +162,6 @@ componentStyle.innerHTML = `
   }
 
   &[data-order-id] {
-    --paddingX: var(--padding-large);
 
     .details {
       font-size: calc(((var(--regular) + var(--small)) / 2))

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style/style.css">
   <style>
     :root {
-      --footer-height: 5.25em;
+      --bnb-height: 5.25em;
     }
     
     .primary-btn {
@@ -77,10 +77,17 @@
       }
     }
     
-    footer {
+    nav {
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      width: 100%;
+      height: var(--bnb-height);
       padding: var(--spacingY-1) var(--spacingX-3);
       align-items: center;
       justify-content: space-between;
+      background: #fff;
+      box-shadow: var(--shadow-top);
     }
   </style>
 </head>
@@ -92,6 +99,7 @@
       <div id="contents" style="background: hsl(0, 0%, 90%);">
         <section>
           <article class="gap-2">
+            <div class="component" data-order-id="order-01"></div>
             <div class="component" data-order-id="order-01"></div>
             <a href="order2.html" class="primary-btn w-100p add-menu-btn">메뉴를 추가할래요</a>
             <div class="flex-row w-100p gap-1">
@@ -127,11 +135,11 @@
             <div class="horizontal-line"></div>
             <p class="price" style="margin-left: auto;">총합 10,000원</p>
           </div>
-          <a href="home.html" class="primary-btn w-100p bg-orange">확인</a>
+          <a href="index.html" class="primary-btn w-100p bg-orange">확인</a>
         </div>
       </div>
       
-      <footer>
+      <nav>
         <div>
           <p class="fz-large fw-bold">종로1가점</p>
           <p>
@@ -140,7 +148,7 @@
           </p>
         </div>
         <div class="primary-btn open-modal-btn">주문하기</div>
-      </footer>
+      </nav>
     </div>
   </div>
   <script src="script/data.js"></script>
