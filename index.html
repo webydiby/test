@@ -1,80 +1,125 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <title>빙샌드 주문 어플리케이션</title>
-  <link rel="stylesheet" href="style/style.css">
-  <style>
-    #splash {
-      --dur-1: 150ms;
-      --dly-1: 1200ms;
-      --dur-2: 150ms;
-      --dly-2: calc(150ms + 1200ms + 300ms);
-      --dur-3: 300ms;
-      --dly-3: calc(150ms + 1200ms + 300ms + 150ms + 1500ms);
-      z-index: 100;
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: var(--orange);
-      animation: scene-3 var(--dur-3) ease-out var(--dly-3) forwards;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>빙샌드 주문 어플리케이션</title>
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+      #splash {
+        --dur-1: 150ms;
+        --dly-1: 1200ms;
+        --dur-2: 150ms;
+        --dly-2: calc(150ms + 1200ms + 300ms);
+        --dur-3: 300ms;
+        --dly-3: calc(150ms + 1200ms + 300ms + 150ms + 1500ms);
+        z-index: 100;
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: var(--orange);
+        animation: scene-3 var(--dur-3) ease-out var(--dly-3) forwards;
 
-      .txt-box {
-        position: absolute;
-        left: calc((100% - 45%) / 2);
-        top: 50%;
-        transform: translate(0, -50%);
-        width: 45%;
-        height: 20%;
-        background: red;
-        overflow: hidden;
-        animation: scene-1 var(--dur-1) ease-out var(--dly-1) forwards;
-      }
-   
-      .logo {
-        visibility: hidden;
-        position: absolute;
-        left: 60%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 62.5%;
-        aspect-ratio: 5 / 2;
-        opacity: 0;
-        background: white;
-        animation: scene-2 var(--dur-2) ease-out var(--dly-2) forwards;
-      }
-    }
+        .txt-box {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          transform: translateX(-50%);
+          width: 40%;
+          height: 100%;
+          background: url(img/splash-text.svg) no-repeat center / contain;
+          
+          .fade {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            left: 100%;
+            background: var(--orange);
+            animation: scene-1 var(--dur-1) ease-out var(--dly-1) forwards;
+          }
+        }
     
-    
-    @keyframes scene-1 {
-      to {
-        width: 0;
+        .logo {
+          position: absolute;
+          left: 60%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 62.5%;
+          aspect-ratio: 5 / 2;
+          opacity: 0;
+          border-radius: 20% 20% 20% 20% / 50% 50% 50% 50%;
+          background: #fff url(img/logo.svg) no-repeat center / 50%;
+          animation: scene-2 var(--dur-2) ease-out var(--dly-2) forwards;
+        }
       }
-    }
-    
-    @keyframes scene-2 {
-      to {
-        visibility: visible;
-        left: 50%;
-        opacity: 1;
+      
+      
+      @keyframes scene-1 {
+        to {
+          left: 0;
+        }
       }
-    }
-    
-    @keyframes scene-3 {
-      to {
-        visibility: hidden;
-        opacity: 0;
+      
+      @keyframes scene-2 {
+        to {
+          left: 50%;
+          opacity: 1;
+        }
       }
-    }
-    </style>
-</head>
-<body>
-  <div id="splash" class="scene-3">
-    <div class="txt-box scene-1">
-      <p>혹은이미지</p>
+      
+      @keyframes scene-3 {
+        to {
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+      </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="screen">
+      <div id="splash" class="scene-3">
+        <div class="txt-box">
+          <div class="fade scene-1"></div>
+        </div>
+        <div class="logo scene-2"></div>
+      </div>
+
+      <header id="header"></header>
+  
+      <div id="contents"></div>
+      
+      <footer id="footer" data-current-category="home"></footer>
     </div>
-    <div class="logo scene-2"></div>
   </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+  <script>
+    const $splash = document.getElementById('splash');
+    
+    function startSplash() {
+      const $lastScene = document.querySelector('.scene-3');
+      $wrap.style.overflow = 'hidden';
+      $wrap.style.height = '100vh';
+      $splash.style.display = 'block';
+      
+      $lastScene.addEventListener('animationend', (e) => {
+        if (e.target !== $lastScene) return;
+        $wrap.style.removeProperty('overflow');
+        $wrap.style.removeProperty('height');
+        $splash.style.removeProperty('display');
+      });
+    }
+
+    (function splashCheck() {
+      if (sessionStorage.getItem('revisit') === null)
+        startSplash();
+      else $splash.style.display = 'none';
+    }());
+    console.log(sessionStorage.getItem('revisit'));
+  </script>
 </body>
 </html>
