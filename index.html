@@ -115,11 +115,14 @@
     }
 
     (function splashCheck() {
-      if (sessionStorage.getItem('revisit') === null)
-        startSplash();
-      else $splash.style.display = 'none';
+      const referrer = document.referrer;
+
+      if (referrer && new URL(referrer).origin === location.origin)
+        $splash.style.display = 'none';
+      else startSplash();
+      // if (sessionStorage.getItem('revisit') === null) startSplash();
+      // else $splash.style.display = 'none';
     }());
-    console.log(sessionStorage.getItem('revisit'));
   </script>
 </body>
 </html>
