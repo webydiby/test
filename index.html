@@ -47,6 +47,8 @@
           top: 50%;
           transform: translate(-50%, -50%);
           width: 62.5%;
+          max-width: 400px;
+          left: 50%;
           aspect-ratio: 5 / 2;
           opacity: 0;
           border-radius: 20% 20% 20% 20% / 50% 50% 50% 50%;
@@ -75,6 +77,14 @@
           opacity: 0;
         }
       }
+      
+      .banner {
+        width: 100%;
+        max-height: calc(100svh - var(--header-height) - var(--bnb-height));
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center;
+      }
       </style>
   </head>
   <body>
@@ -90,10 +100,22 @@
       <header id="header"></header>
 
       <div id="contents">
-        <img src="img/banner.png" alt="배너 이미지" class="banner w-100p">
+        <img src="img/banner.png" alt="배너 이미지" class="banner">
+
+        <section class="bg-orange-red c-white">
+          <article>
+            <p class="title box">이번주 인기 메뉴</p>
+            <div class="menu-component" data-menu-id="dish-01" data-href="order-dish-01.html"></div>
+          </article>
+        </section>
+        
+        <section class="bg-green c-white">
+          <article>
+            <p class="title box">최근에 주문한 매장</p>
+            <div class="store-component" data-store-id="store-01" data-href="order-dish.html"></div>
+          </article>
+        </section>
       </div>
-  
-      <div id="contents"></div>
       
       <nav id="bnb" data-current-category="index"></nav>
     </div>
@@ -102,27 +124,27 @@
   <script src="script/component.js"></script>
   <script src="script/script.js"></script>
   <script>
-    const $splash = document.getElementById('splash');
+    // const $splash = document.getElementById('splash');
     
-    function startSplash() {
-      const $lastScene = document.querySelector('.scene-3');
-      $wrap.style.overflow = 'hidden';
-      $wrap.style.height = '100vh';
-      $splash.style.display = 'block';
+    // function startSplash() {
+    //   const $lastScene = document.querySelector('.scene-3');
+    //   $wrap.style.overflow = 'hidden';
+    //   $wrap.style.height = '100vh';
+    //   $splash.style.display = 'block';
       
-      $lastScene.addEventListener('animationend', (e) => {
-        if (e.target !== $lastScene) return;
-        $wrap.style.removeProperty('overflow');
-        $wrap.style.removeProperty('height');
-        $splash.style.removeProperty('display');
-      });
-    }
+    //   $lastScene.addEventListener('animationend', (e) => {
+    //     if (e.target !== $lastScene) return;
+    //     $wrap.style.removeProperty('overflow');
+    //     $wrap.style.removeProperty('height');
+    //     $splash.style.removeProperty('display');
+    //   });
+    // }
 
-    (function splashCheck() {
-      if (sessionStorage.getItem('revisit') === null)
-        startSplash();
-      else $splash.style.display = 'none';
-    }());
+    // (function splashCheck() {
+    //   if (sessionStorage.getItem('revisit') === null)
+    //     startSplash();
+    //   else $splash.style.display = 'none';
+    // }());
   </script>
 </body>
 </html>

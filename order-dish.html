@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>빙샌드 주문 어플리케이션</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+  <div id="wrap">
+    <div id="screen">
+      <header id="header" data-title="주문하기" data-prev-page="order.html"></header>
+  
+      <div id="contents" class="bg-orange c-white">
+        <section>
+          <article>
+            <div class="store-component selected disable" data-store-id="current"></div>
+            <a href="order.html" class="fw-semi td-underline box">다른 매장 선택하기</a>
+          </article>
+    
+          <article>
+            <div class="box">
+              <p class="title">MENU 선택</p>
+              <div class="btn-area">
+                <button class="list-icon"></button>
+                <button class="grid-icon"></button>
+              </div>
+            </div>
+            <div class="component-group">
+              <div class="menu-component" data-menu-id="dish-01" data-href="order-dish-01.html"></div>
+              <div class="menu-component" data-menu-id="dish-02" data-href="order-dish-02.html"></div>
+              <div class="menu-component" data-menu-id="dish-03" data-href="order-dish-03.html"></div>
+              <div class="menu-component" data-menu-id="dish-04" data-href="order-dish-04.html"></div>
+              <div class="menu-component" data-menu-id="dish-05" data-href="order-dish-05.html"></div>
+              <div class="menu-component" data-menu-id="dish-06" data-href="order-dish-06.html"></div>
+              <div class="menu-component" data-menu-id="dish-07" data-href="order-dish-07.html"></div>
+              <div class="menu-component" data-menu-id="dish-08" data-href="order-dish-08.html"></div>
+              <div class="menu-component" data-menu-id="dish-09" data-href="order-dish-09.html"></div>
+              <div class="menu-component" data-menu-id="dish-10" data-href="order-dish-10.html"></div>
+            </div>
+          </article>
+        </section>
+      </div>
+      
+      <nav id="bnb" data-current-category="order"></nav>
+    </div>
+  </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+</body>
+</html>

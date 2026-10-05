@@ -1,110 +1,228 @@
-const $components = document.querySelectorAll('.component');
+const $components = document.querySelectorAll('[class*="-component"]');
+const $storeComponents = document.querySelectorAll('.store-component');
+const $menuComponents = document.querySelectorAll('.menu-component');
+const $orderComponents = document.querySelectorAll('.order-component');
+const $cartComponents = document.querySelectorAll('.cart-component');
 const componentStyle = document.createElement('style');
 
-function createMenu(element, menuId) {
-  const info = menuInfo[menuId];
-  const href = element.dataset.href;
-  const attr = href ? `href="${href}"` : '';
-  const tag = href ? 'a' : 'button';
-
-  element.innerHTML = `
-  <img src="img/dish/${menuId}.png" alt="${info.kr} 이미지" class="thumb">
-  <div class="col">
-    <div class="row">
-      <p class="name">${info.kr}</p>
-    </div>
-    <div class="row">
-      <p class="en-name c-charcoal fz-small">${info.en}</p>
-    </div>
-    <div class="row">
-      <p class="price">${parseInt(info.price).toLocaleString()}원</p>
-      <${tag} ${attr} class="primary-btn select-btn">선택하기</${tag}>
-    </div>
-  </div>
-  `;
-}
-
-function createStore(element, storeId) {
-  const info = storeInfo[storeId];
-  const href = element.dataset.href;
-  const attr = href ? `href="${href}"` : '';
-  const minute = parseInt(info.minute);
-
-  element.innerHTML = `
-  <div class="row">
-    <p class="name">
-      ${info.name}
-      <sub>${info.distance}</sub>
-    </p>
-  </div>
-  <div>
-    <p class="c-charcoal fz-small">${info.address}</p>
-    <p class="c-charcoal fz-small">예상 소요시간: ${minute} ~ ${minute + 15}분</p>
-  </div>
-  <div class="row">
-    <div class="symbol"></div>
-    <a ${attr} class="primary-btn">주문하기</a>
-  </div>
-  `;
-}
-
-function createOrder(element, orderId) {
-  const info = orderInfo[orderId];
-
-  element.innerHTML = `
-  <div class="row">
-      <div class="symbol"></div>
+(function createStoreComp() {
+  $storeComponents.forEach((element) => {
+    const href = element.dataset.href;
+    const attr = href ? `href="${href}"` : '';
+    const tag = href ? 'a' : 'button';
+  
+    element.innerHTML = `
+    <div class="component-contents col">
+      <div class="row">
+        <p class="fw-bold">
+          <span class="store-name"></span>
+          <sub class="distance"></sub>
+        </p>
+      </div>
       <div>
-        <p class="date c-charcoal fz-small">5월 28일 (수)</p>
-        <p class="name">종로1가점</p>
-        <p class="address c-charcoal fz-small">서울 종로구 MBC로 01</p>
+        <p class="address c-charcoal fz-small"></p>
+        <p class="minute c-charcoal fz-small"></p>
+      </div>
+      <div class="row">
+        <div class="symbol"></div>
+        <${tag} ${attr} class="primary-btn select-btn">선택하기</${tag}>
       </div>
     </div>
-    <div class="details">
-      <p>클래식 햄 치즈 샌드위치 <b>1개</b></p>
-      <p>치킨 시저 샐러드 <b>1개</b></p>
-    </div>
-    <div class="horizontal-line"></div>
-    <p class="price">총합 ${parseInt(info.price).toLocaleString()}원</p>
-  </div>
-  `;
+    `;
+  
+    renderStoreComp(element);
+  });
+})();
+
+function renderStoreComp(element) {
+  const storeId = element.dataset.storeId === 'current'
+    ? cartInfo.store
+    : element.dataset.storeId;
+  const info = storeInfo[storeId];
+  const minute = parseInt(info.minute);
+
+  const $storeName = element.querySelector('.store-name');
+  const $distance = element.querySelector('.distance');
+  const $address = element.querySelector('.address');
+  const $minute = element.querySelector('.minute');
+
+  $storeName.textContent = info.name;
+  $distance.textContent = info.distance;
+  $address.textContent = info.address;
+  $minute.textContent = `예상 소요시간: ${minute} ~ ${minute + 15}분`;
 }
 
-$components.forEach((e) => {
-  if (e.hasAttribute('data-menu-id'))
-    createMenu(e, e.dataset.menuId);
-  if (e.hasAttribute('data-store-id'))
-    createStore(e, e.dataset.storeId);
-  if (e.hasAttribute('data-order-id'))
-    createOrder(e, e.dataset.orderId);
-});
+(function createMenuComp() {
+  $menuComponents.forEach((element) => {
+    const menuId = element.dataset.menuId;
+    const info = menuInfo[menuId];
+    const href = element.dataset.href;
+    const attr = href ? `href="${href}"` : '';
+    const tag = href ? 'a' : 'button';
+  
+    element.innerHTML = `
+    <div class="component-contents row">
+      <img src="img/dish/${menuId}.png" alt="${info.kr} 이미지" class="thumb">
+      <div class="col">
+        <div class="row">
+          <p class="menu-kr fw-bold">${info.kr}</p>
+        </div>
+        <div class="row">
+          <p class="menu-en c-charcoal fz-small">${info.en}</p>
+        </div>
+        <div class="row">
+          <p class="price">${parseInt(info.price).toLocaleString()}원</p>
+          <${tag} ${attr} class="primary-btn select-btn">선택하기</${tag}>
+        </div>
+      </div>
+    </div>
+    `;
+  });
+})();
+
+(function createOrderComp() {
+  $orderComponents.forEach((element) => {
+    element.innerHTML = `
+    <div class="component-contents col">
+      <div class="row">
+        <div class="symbol"></div>
+        <div>
+          <p class="date c-charcoal fz-small">
+            <span class="month"></span>월
+            <span class="day"></span>일
+            (<span class="week"></span>)
+          </p>
+          <p class="store-name fw-bold"></p>
+          <p class="address c-charcoal fz-small"></p>
+        </div>
+      </div>
+      <div class="details"></div>
+      <div class="horizontal-line"></div>
+      <p class="price"></p>
+    </div>
+    `;
+    
+    renderOrderComp(element);
+  });
+})();
+
+function renderOrderComp(element) {
+  const orderId = element.dataset.orderId;
+  const info = orderId === 'current'
+    ? orderInfo
+    : historyInfo[orderId];
+  const date = info.date;
+  const storeName = storeInfo[info.store].name;
+  const address = storeInfo[info.store].address;
+  const details = info.items
+    .map((id) => `<p>${menuInfo[id].kr} <b>1개</b></p>`)
+    .join('');
+  const price = info.items.reduce((sum, id) => {
+    return sum + parseInt(menuInfo[id].price);
+  }, 0).toLocaleString();
+  
+  const $date = element.querySelector('.date');
+  const $storeName = element.querySelector('.store-name');
+  const $address = element.querySelector('.address');
+  const $details = element.querySelector('.details');
+  const $price = element.querySelector('.price');
+
+  if (date) $date.textContent = date;
+  $storeName.textContent = storeName;
+  $address.textContent = address;
+  $details.innerHTML = details;
+  $price.textContent = `총합 ${price}원`;
+}
+
+(function createCartComp() {
+  $cartComponents.forEach((element) => {
+    element.innerHTML = `
+    <div class="component-contents col">
+      <div class="row">
+        <div class="symbol"></div>
+        <div>
+          <p class="date c-charcoal fz-small">
+            <span class="month"></span>월
+            <span class="day"></span>일
+            (<span class="week"></span>)
+          </p>
+          <p class="store-name fw-bold"></p>
+          <p class="address c-charcoal fz-small"></p>
+        </div>
+      </div>
+      <div class="item-list col"></div>
+    </div>
+    `;
+    
+    renderCartComp(element);
+  });
+})();
+
+function renderCartComp(element) {
+  const info = cartInfo;
+  const storeName = storeInfo[cartInfo.store].name;
+  const address = storeInfo[cartInfo.store].address;
+  const itemList = info.items
+    .map((items) => `
+    <div class="item row">
+      <img src="img/dish/${items[0]}.png">
+      <div class="row">
+        <div class="details">${
+          items
+            .map((id) => `<p>${menuInfo[id].kr} 1개</p>`)
+            .join('')
+          }<p class="price">${
+            items.reduce((sum, id) => {
+              return sum + parseInt(menuInfo[id].price)
+            }, 0).toLocaleString()
+          }원</p>
+        </div>
+        <button class="close-btn"></button>
+      </div>
+    </div>
+    `)
+    .join('');
+  
+  const $storeName = element.querySelector('.store-name');
+  const $address = element.querySelector('.address');
+  const $itemList = element.querySelector('.item-list');
+
+  $storeName.textContent = storeName;
+  $address.textContent = address;
+  $itemList.innerHTML = itemList;
+}
 
 componentStyle.innerHTML = `
-.component {
-  --gap-base: 0.625em;
+[class*="-component"] {
   --paddingX: 1.25em;
   --paddingY: 0.625em;
+  --gap: var(--paddingY);
   position: relative;
+  width: 100%;
   padding: var(--paddingY) var(--paddingX);
   border-radius: var(--paddingX);
   background: var(--white);
   color: var(--black);
   box-shadow: var(--shadow-bottom);
 
-  &, & :is(.row, .col) {
+  .row, .col {
     display: flex;
     flex-direction: column;
     width: 100%;
     flex: 1;
-    gap: var(--paddingY);
+    gap: var(--gap);
 
     &.row {
       flex-direction: row;
     }
   }
   
-  &.disable {
+  &.selected {
     opacity: 0.75;
+
+  }
+
+  &.disable {
     pointer-events: none;
   }
   
@@ -118,13 +236,16 @@ componentStyle.innerHTML = `
     line-height: 1;
     vertical-align: baseline;
   }
-  
-  .name {
-    font-weight: var(--bold);
-  }
+
+  .details {
+    font-size: calc(((var(--regular) + var(--small)) / 2));
     
+    p:nth-of-type(n + 2) {
+      margin-top: 0.125em;
+    }
+  }
+  
   .price {
-    margin: auto 0;
     word-break: keep-all;
   }
   
@@ -137,16 +258,22 @@ componentStyle.innerHTML = `
     margin-top: 0.3125em;
   }
 
-  &[data-menu-id] {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+  &.menu-component {
     container: has-thumb / inline-size;
+    
+    .component-contents {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
 
     .thumb {
       width: 7.5em;
       border-radius: var(--paddingY);
+    }
+
+    .price {
+      margin: auto 0;
     }
     
     @container has-thumb (max-width: 20em) {
@@ -161,13 +288,51 @@ componentStyle.innerHTML = `
     }
   }
 
-  &[data-order-id] {
-
-    .details {
-      font-size: calc(((var(--regular) + var(--small)) / 2))
-    }
+  &.order-component, &.history-component {
+  
     .price {
       margin-left: auto;
+    }
+  }
+
+  &.cart-component {
+
+    .item-list > * {
+      padding-top: var(--paddingY);
+      border-top: 1px solid var(--gray);
+    }
+    
+    .symbol, img {
+      width: 4em;
+      align-self: start;
+    }
+
+    img + * {
+      padding-top: 0.25em;
+      padding: 0.25em 0;
+    }
+
+    .close-btn {
+      position: relative;
+      width: 1em;
+      height: 1em;
+      margin-left: auto;
+      margin-right: 0.125em;
+
+      &::after, &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(var(--rotate, 45deg));
+        width: 100%;
+        height: 0;
+        border-top: 1px solid var(--gray);
+      }
+
+      &::before {
+        --rotate: -45deg
+      }
     }
   }
 }

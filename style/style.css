@@ -110,6 +110,18 @@ small 제거 고민해보기. 미리보기는 변수 주석
   background-color: var(--orange)!important;
 }
 
+.bg-orange-red {
+  background-color: var(--orange-red)!important;
+}
+
+.bg-tomato {
+  background-color: var(--tomato)!important;
+}
+
+.bg-green {
+  background-color: var(--green)!important;
+}
+
 .bg-white {
   background-color: var(--white)!important;
 }

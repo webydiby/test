@@ -3,18 +3,24 @@ const $header = document.getElementById('header');
 const $content = document.getElementById('contents');
 const $bnb = document.getElementById('bnb');
 const $modal = document.querySelector('.modal');
-const $modalContent = document.querySelector('.modal-contents');
 const $openModalBtn = document.querySelector('.open-modal-btn');
 const $closeModalBtn = document.querySelector('.close-modal-btn');
 const $listIcons = document.querySelectorAll('button.list-icon');
 const $gridIcons = document.querySelectorAll('button.grid-icon');
-const $likeIcons = document.querySelectorAll('button.like-icon');
-const $selectBtns = document.querySelectorAll('button.select-btn');
+const $selectBtns = document.querySelectorAll('.select-btn');
+const $months = document.querySelectorAll('.month');
+const $days = document.querySelectorAll('.day');
+const $weeks = document.querySelectorAll('.week');
+const $aboutDish = document.querySelector('[id*="about-dish-"]');
+const $addCartBtn = document.querySelector('.add-cart-btn');
+
+const date = new Date();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+const week = ['일', '월', '화', '수', '목', '금', '토'][date.getDay()];
 
 const isIndex = window.location.pathname.endsWith('/index.html');
 if (!isIndex) sessionStorage.setItem('revisit', 'true');
-
-
 
 (function loadHeader() {
   if (!$header) return;
@@ -26,7 +32,7 @@ if (!isIndex) sessionStorage.setItem('revisit', 'true');
     title = `<p class="title">${title}</p>`;
   if (prevPage)
     prevPage = `<a href="${prevPage}" class="prev-icon"></a>`;
-  else
+  if (isIndex)
     signature = `<img src="img/signature.svg" alt="시그니쳐 이미지" id="signature">`;
 
   $header.innerHTML = `
@@ -77,43 +83,74 @@ $gridIcons.forEach((e) => {
   });
 });
 
-$likeIcons.forEach((e) => {
-  e.addEventListener('click', () => {
-    e.classList.toggle('checked');
-  });
-});
+function toggleOrder(button) {
+  const $closest = button.closest('[class*="-component"]');
+  const storeId = $closest.dataset.storeId;
+  const menuId = $closest.dataset.menuId;
+  const isSelected = $closest.classList.contains('selected');
+  let text = button.innerText;
+  isSelected
+  ? button.innerText = text.replace('됨', '하기')
+  : button.innerText = text.replace('하기', '됨');
+  button.innerText.innerText = text;
+  $closest.classList.toggle('selected');
+  updateOrder(storeId, menuId, !isSelected);
+}
 
-function disableComponent(element) {
-  const $btn = element.querySelector('.select-btn');
-  const disabled = element.classList.contains('disable');
-  if (!$btn) return;
-  if (!disabled) {
-    element.classList.add('disable');
-    $btn.innerText = '선택됨';
-  } else {
-    element.classList.remove('disable');
-    $btn.innerText = '선택하기';
+function updateOrder(store, menu, condition) {
+  if (store) {
+    condition
+    ? cartInfo.store = store
+    : cartInfo.store = 'store-01';
+    localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
+  }
+  if (menu) {
+    condition
+    ? orderInfo.items.push(menu)
+    : orderInfo.items = orderInfo.items.filter(e => e !== menu);
   }
 }
 
 $selectBtns.forEach((e) => {
-  const $component = e.closest('.component');
-  e.addEventListener('click', () => disableComponent($component));
+  e.addEventListener('click', () => toggleOrder(e));
 });
 
-$components.forEach((e) => {
-  if (e.classList.contains('disable'))
-    disableComponent(e);
-});
+$months.forEach((e) => e.textContent = month);
+$days.forEach((e) => e.textContent = day);
+$weeks.forEach((e) => e.textContent = week);
 
 $wrap.addEventListener('click', (e) => {
   const cls = $wrap.classList;
   const isContained = cls.contains('modal-on');
   if (!isContained && e.target === $openModalBtn)
     cls.add('modal-on');
-  if (!isContained) return;
-  if (!$modalContent.contains(e.target)
-    && e.target !== $openModalBtn
-    || e.target === $closeModalBtn)
+  else if (e.target === $closeModalBtn)
     cls.remove('modal-on');
 });
+
+if ($aboutDish) {
+  const $img = $aboutDish.querySelector('img');
+  const $kr = $aboutDish.querySelector('.dish-kr');
+  const $en = $aboutDish.querySelector('.dish-en');
+  const $desc = $aboutDish.querySelector('.dish-description');
+  const dishId = $aboutDish.id.replace('about-', '');
+  
+  orderInfo.items.push(dishId);
+  $img.src = `img/dish/${dishId}.png`;
+  $kr.textContent = menuInfo[dishId].kr;
+  $en.textContent = menuInfo[dishId].en;
+  $desc.textContent = menuInfo[dishId].description;
+}
+
+if ($addCartBtn) {
+  $addCartBtn.addEventListener('click', () => {
+    cartInfo.items.push(orderInfo.items);
+    localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
+    $addCartBtn.style.opacity = '0.75';
+    $addCartBtn.textContent = '장바구니에 담았어요!';
+    $components.forEach((e) => {
+      e.classList.add('disable');
+    });
+    $orderComponents.forEach((e) => {renderOrderComp(e)});
+  }, {once:true});
+}
