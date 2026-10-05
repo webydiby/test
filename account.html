@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>빙샌드 주문 어플리케이션</title>
+  <link rel="stylesheet" href="style/style.css">
+  <style>
+    label.normal-component {
+      --paddingY: var(--paddingX);
+      width: 100%;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-base);
+
+      p {
+        padding: 0 0.5em;
+      }
+
+      input {
+        padding: 0.25em 0.5em;
+        font-size: var(--regular);
+        border-bottom: 1px solid var(--gray);
+      }
+    }
+
+    .primary-btn {
+      --paddingY: 1.75em;
+      border-radius: calc(var(--radius) * 0.5);
+    }
+
+    .find-account {
+      --gap: 0.75em;
+      display: flex;
+      gap: var(--gap);
+      font-size: calc((var(--regular) + var(--small)) / 2);
+
+      :nth-child(2) {
+        padding: 0 var(--gap);
+        border-left: 1px solid var(--gray);
+        border-right: 1px solid var(--gray);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="screen">
+      <header id="header" data-title="로그인" data-prev-page="index.html"></header>
+  
+      <div id="contents" style="background: hsl(0, 0%, 95%);">
+        <section>
+          <article>
+            <label for="" class="normal-component">
+              <div class="col">
+                <p>아이디</p>
+                <input type="text" placeholder="아이디 입력">
+              </div>
+            </label>
+            <label for="" class="normal-component">
+              <div class="col">
+                <p>비밀번호</p>
+                <input type="text" placeholder="비밀번호 입력">
+              </div>
+            </label>
+          </article>
+          <article>
+            <div class="primary-btn w-100p bg-silver">로그인</div>
+            <div class="primary-btn w-100p" style="background: #fae100; color: #371d1e;">카카오톡으로 로그인</div>
+          </article>
+          <p class="find-account">
+            <span>아이디 찾기</span>
+            <span>비밀번호 찾기</span>
+            <span>회원가입</span>
+          </p>
+        </section>
+      </div>
+      
+      <nav id="bnb" data-current-category="account"></nav>
+    </div>
+  </div>
+  <script src="script/data.js"></script>
+  <script src="script/component.js"></script>
+  <script src="script/script.js"></script>
+</body>
+</html>

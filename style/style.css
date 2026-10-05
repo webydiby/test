@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'IbmPlexSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-ExtraLight.woff') format('woff');
+  font-display: swap;
+}
+
 :root {
   --spacingX-1: 0.5em;
   --spacingX-2: 1em;
@@ -21,10 +27,16 @@
   --orange: #ffaf1f;
   --green: #78c143;
   
-  --normal: normal;
+  --font: 'IbmPlexSans';
+  
+  --normal: 600;
   --semi: 600;
-  --bold: bold;
-  --xBold: 800;
+  --bold: 600;
+  --xBold: 600;
+  /* --normal: 500;
+  --semi: 600;
+  --bold: 700;
+  --xBold: 800; */
   
   --small: 0.75em;
   --regular: 1em;
@@ -39,16 +51,11 @@
 }
 
 /* 
-todo
-
-고해상도 사진. 그리고 라운드 제거.
-
-헤더푸터 그림자, 스크롤 숨기기 액션
 
 url 전부 최상위 경로 (/img...) 변경
 small 제거 고민해보기. 미리보기는 변수 주석
 
-매장보기 서브버튼 전부 제거하고 폰트사이즈도 스몰라지
+
 
 
 
@@ -63,6 +70,7 @@ small 제거 고민해보기. 미리보기는 변수 주석
   background-repeat: no-repeat;
   color: inherit;
   border: none;
+  font-family: var(--font);
   text-decoration: none;
   list-style: none;
   vertical-align: top;
@@ -130,6 +138,10 @@ small 제거 고민해보기. 미리보기는 변수 주석
   background-color: var(--silver)!important;
 }
 
+.bg-gray {
+  background-color: var(--gray)!important;
+}
+
 .c-orange-red {
   color: var(--orange-red)!important;
 }
@@ -140,6 +152,10 @@ small 제거 고민해보기. 미리보기는 변수 주석
 
 .c-gray {
   color: var(--gray)!important;
+}
+
+.c-black {
+  color: var(--black)!important;
 }
 
 .c-charcoal {
@@ -163,6 +179,7 @@ small 제거 고민해보기. 미리보기는 변수 주석
 }
 
 p, span, a, button {
+  font-weight: var(--normal);
   font-size: var(--regular);
   line-height: 1.25;
 }
@@ -194,11 +211,9 @@ a, button {
 }
 
 .primary-btn {
-  --padding-1: 1.125em;
-  --padding-2: 1.5em;
-  --padding-y: var(--padding-1);
-  padding: var(--padding-y) 1.25em;
-  border-radius: calc(var(--padding-y) * 2 + 1em);
+  --paddingY: 1.125em;
+  padding: var(--paddingY) 1.25em;
+  border-radius: calc(var(--paddingY) * 2 + 1em);
   background: var(--orange-red);
   color: var(--white);
   font-weight: var(--xBold);
@@ -224,39 +239,39 @@ a, button {
   background: var(--img) no-repeat center / contain;
 
   &.like-icon {
-    --img: url(../img/icon/icon-heart-outline.svg);
+    --img: url(/img/icon/icon-heart-outline.svg);
   }
 
   &.list-icon {
-    --img: url(../img/icon/icon-list.svg);
+    --img: url(/img/icon/icon-list.svg);
   }
 
   &.grid-icon {
-    --img: url(../img/icon/icon-grid.svg);
+    --img: url(/img/icon/icon-grid.svg);
   }
 
   &.notice-icon {
     --ratio: 17 / 20;
-    --img: url(../img/icon/icon-notice.svg);
+    --img: url(/img/icon/icon-notice.svg);
   }
 
   &.cart-icon {
-    --img: url(../img/icon/icon-cart.svg);
+    --img: url(/img/icon/icon-cart.svg);
   }
 
   &.prev-icon {
     --ratio: 9 / 22;
-    --img: url(../img/icon/icon-prev.svg);
+    --img: url(/img/icon/icon-prev.svg);
   }
 }
 
 .symbol {
   aspect-ratio: 1 / 1;
-  background: url(../img/symbol.svg) no-repeat center / contain;
+  background: url(/img/symbol.svg) no-repeat center / contain;
 }
 
 button.like-icon.checked {
-  --img: url(../img/icon/icon-heart.svg);
+  --img: url(/img/icon/icon-heart.svg);
 }
 
 .show-grid button.list-icon {
@@ -294,7 +309,7 @@ body {
     position: relative;
     height: 100svh;
     margin: auto;
-    background: url(../img/phone.png) no-repeat center / contain;
+    background: url(/img/phone.png) no-repeat center / contain;
     aspect-ratio: 397 / 831;
   }
 }
@@ -473,13 +488,3 @@ article {
     transition: inherit;
   }
 }
-
-
-
-
-
-
-
-
-
-

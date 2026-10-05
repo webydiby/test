@@ -14,9 +14,9 @@ const componentStyle = document.createElement('style');
     element.innerHTML = `
     <div class="component-contents col">
       <div class="row">
-        <p class="fw-bold">
-          <span class="store-name"></span>
-          <sub class="distance"></sub>
+        <p>
+          <span class="store-name fw-bold"></span>
+          <sub class="distance fw-bold"></sub>
         </p>
       </div>
       <div>
