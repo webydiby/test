@@ -74,6 +74,11 @@
         .modal-on & {
           opacity: 1;
         }
+        
+        .details {
+          font-size: calc((var(--regular) + var(--small)) / 2);
+          gap: 0.25em;
+        }
       }
     }
     
@@ -135,7 +140,7 @@
               </p>
             </div>
             <div class="horizontal-line"></div>
-            <div class="details"></div>
+            <div class="details flex-col"></div>
             <div class="horizontal-line"></div>
             <p class="price" style="margin-left: auto;"></p>
           </div>

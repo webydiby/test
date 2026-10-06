@@ -85,6 +85,71 @@
         object-fit: cover;
         object-position: center;
       }
+
+      #slide {
+        --gap: var(--spacingX-1);
+        gap: var(--gap);
+        margin-top: var(--spacingY-1);
+        --col: 1;
+        --nth: 0;
+
+        @container screen (max-width: 320px) {
+          & {
+            --col: 2;
+          }
+        }
+
+        @container screen (min-width: 769px) {
+          & {
+            --col: 3;
+          }
+        }
+        
+        .inner {
+          flex: 1;
+          gap: var(--gap);
+          overflow: hidden;
+
+          .item {
+            transform: translateX(calc(-100% * var(--nth) - var(--gap) * var(--nth)));
+            display: flex;
+            flex-direction: column;
+            width: calc((100% - (var(--gap) * (var(--col) - 1))) / var(--col));
+            flex-shrink: 0;
+            align-items: center;
+            gap: 1em;
+            padding: 1.125em 1em;
+            border-radius: calc(var(--radius));
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transition: transform 300ms ease;
+
+            img {
+              width: 100%;
+            }
+
+            span {
+              text-align: center;
+            }
+          }
+        }
+        
+        #prev-slide,
+        #next-slide {
+          width: 1.25em;
+          cursor: pointer;
+
+          &#prev-slide {
+            opacity: calc(1 * var(--nth) + 0.75);
+          }
+  
+          &#next-slide {
+            transform: rotate(180deg);
+            opacity: max(var(--maxSlide) - var(--nth) - var(--col), 0.75);
+          }
+        }
+      }
+
       </style>
   </head>
   <body>
@@ -105,7 +170,34 @@
         <section class="bg-tomato c-white">
           <article>
             <p class="title box">이번주 인기 메뉴에요!</p>
-            <div class="menu-component" data-menu-id="dish-01" data-href="order-dish-01.html"></div>
+            <div id="slide" class="flex-row w-100p">
+              <svg id="prev-slide" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.17157 12.1736V1.002C7.17157 0.1111 6.09443 -0.335067 5.46447 0.294898L0.585786 5.17358C-0.195262 5.95463 -0.195262 7.22095 0.585786 8.002L5.46447 12.8807C6.09443 13.5106 7.17157 13.0645 7.17157 12.1736Z" fill="white"/></svg>
+
+              <div class="inner flex-row c-black">
+                <a href="order-dish-05.html" class="item">
+                  <img src="img/dish/dish-05.png">
+                  <span>시그니처 호밀 샌드위치</span>
+                </a>
+                <a href="order-dish-04.html" class="item">
+                  <img src="img/dish/dish-04.png">
+                  <span>바질 & 카프레제 크루아상 샌드</span>
+                </a>
+                <a href="order-dish-03.html" class="item">
+                  <img src="img/dish/dish-03.png">
+                  <span>햄치즈 치아바타 샌드</span>
+                </a>
+                <a href="order-dish-02.html" class="item">
+                  <img src="img/dish/dish-02.png">
+                  <span>햄 & 에그샐러드 샌드위치</span>
+                </a>
+                <a href="order-dish-01.html" class="item">
+                  <img src="img/dish/dish-01.png">
+                  <span>닭가슴살 베이컨 샌드위치</span>
+                </a>
+              </div>
+              
+              <svg id="next-slide" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.17157 12.1736V1.002C7.17157 0.1111 6.09443 -0.335067 5.46447 0.294898L0.585786 5.17358C-0.195262 5.95463 -0.195262 7.22095 0.585786 8.002L5.46447 12.8807C6.09443 13.5106 7.17157 13.0645 7.17157 12.1736Z" fill="white"/></svg>
+            </div>
           </article>
         </section>
         
@@ -125,6 +217,37 @@
   <script src="script/script.js"></script>
   <script>
     const $splash = document.getElementById('splash');
+    const $slide = document.getElementById('slide');
+    const $prevSlide = document.getElementById('prev-slide');
+    const $nextSlide = document.getElementById('next-slide');
+    const $innerSlide = document.querySelector('#slide .inner');
+    const maxSlide = $slide.querySelector('.inner').childElementCount - 1;
+    
+    $slide.style.setProperty('--maxSlide', maxSlide + 1);
+    $prevSlide.addEventListener('click', moveSlide);
+    $nextSlide.addEventListener('click', moveSlide);
+
+    function moveSlide(event) {
+      let nowSlide = parseInt(
+        getComputedStyle($slide)
+          .getPropertyValue('--nth')
+      );
+
+      let showing = parseInt(
+        getComputedStyle($slide)
+          .getPropertyValue('--col') - 1
+      );
+      
+      if (nowSlide > 0
+      && event.currentTarget === $prevSlide)
+        --nowSlide;
+
+      else if (nowSlide < maxSlide - showing
+      && event.currentTarget === $nextSlide)
+        ++nowSlide;
+
+      $slide.style.setProperty('--nth', nowSlide);
+    }
     
     function startSplash() {
       const $lastScene = document.querySelector('.scene-3');

@@ -42,7 +42,7 @@
   --regular: 1em;
   --large: 1.25em;
   
-  --shadow-base: 0 0 4px hsla(0, 0%, 0%, 10%);
+  --shadow: 0 0 4px hsla(0, 0%, 0%, 10%);
   --shadow-top: 0 -2px 4px hsla(0, 0%, 0%, 10%);
   --shadow-bottom: 0 2px 4px hsla(0, 0%, 0%, 10%);
 
@@ -52,7 +52,7 @@
 
 /* 
 
-url 전부 최상위 경로 (/img...) 변경
+url 전부 최상위 경로 (../img...) 변경
 small 제거 고민해보기. 미리보기는 변수 주석
 
 
@@ -239,39 +239,39 @@ a, button {
   background: var(--img) no-repeat center / contain;
 
   &.like-icon {
-    --img: url(/img/icon/icon-heart-outline.svg);
+    --img: url(../img/icon/icon-heart-outline.svg);
   }
 
   &.list-icon {
-    --img: url(/img/icon/icon-list.svg);
+    --img: url(../img/icon/icon-list.svg);
   }
 
   &.grid-icon {
-    --img: url(/img/icon/icon-grid.svg);
+    --img: url(../img/icon/icon-grid.svg);
   }
 
   &.notice-icon {
     --ratio: 17 / 20;
-    --img: url(/img/icon/icon-notice.svg);
+    --img: url(../img/icon/icon-notice.svg);
   }
 
   &.cart-icon {
-    --img: url(/img/icon/icon-cart.svg);
+    --img: url(../img/icon/icon-cart.svg);
   }
 
   &.prev-icon {
     --ratio: 9 / 22;
-    --img: url(/img/icon/icon-prev.svg);
+    --img: url(../img/icon/icon-prev.svg);
   }
 }
 
 .symbol {
   aspect-ratio: 1 / 1;
-  background: url(/img/symbol.svg) no-repeat center / contain;
+  background: url(../img/symbol.svg) no-repeat center / contain;
 }
 
 button.like-icon.checked {
-  --img: url(/img/icon/icon-heart.svg);
+  --img: url(../img/icon/icon-heart.svg);
 }
 
 .show-grid button.list-icon {
@@ -309,7 +309,7 @@ body {
     position: relative;
     height: 100svh;
     margin: auto;
-    background: url(/img/phone.png) no-repeat center / contain;
+    background: url(../img/phone.png) no-repeat center / contain;
     aspect-ratio: 397 / 831;
   }
 }
@@ -484,7 +484,7 @@ article {
     padding: var(--spacingY-4) var(--spacingX-3);
     border-radius: var(--radius);
     background: var(--white);
-    box-shadow: var(--shadow-base);
+    box-shadow: var(--shadow);
     transition: inherit;
   }
 }
